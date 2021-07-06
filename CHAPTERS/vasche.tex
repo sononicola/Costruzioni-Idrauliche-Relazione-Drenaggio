@@ -1,0 +1,235 @@
+\chapter{vasche belle  belle}
+Al progetto della rete di drenaggio vengono ora aggiunte tre vasche di laminazione in corrispondenza dei tre sbocchi della rete e chiamate rispettivamente: \emph{Nord}, \emph{Centro} e \emph{Sud}.
+Lo scopo di tali vasche è quello di fungere da ammortizzatore idraulico venendo dimensionate in modo da contenere la portata massima scaricata nel corpo idrico recettore.
+
+Il predimensionamento delle vasche si articola in un metodo iteritavo per far sì di avere il maggior riempimento di esse (prossimo al \SI{100}{\percent}) e parallelamente un \emph{Maximum Outflow} minore della massima portata da mantenere come da progetto. 
+Tale portata è calcolata tenendo conte delle prescrizioni legislative per il coefficente udometrico, che per Trento è pari a $C_{udo} = \SI{20}{\litre\per\second\per\hectare}$, fissando così la portata massima in uscita da scaricare. 
+
+La portata massima da mantenere pertanto diviene:
+\begin{equation}
+    Q_{max} = C_{udo} \cdot A_{\text{sottobacino}}
+    \label{eq:qmax} \quad ,
+\end{equation}
+dove con $A_{\text{sottobacino}}$ si intende l'area di pertinenza di ciascuna vasca, ovvero la somma delle aree dei sottobacini confluenti in essa.
+
+I parameri da variare nell'iterazione (in fase non esecutiva del progetto) sono l'area della vasca e il diametro dell'orifizio della stessa (o analogamente l'area dell'orifizio -- essendo di sezione cilindrica). 
+
+
+Come prima iterazione l'area dell'orifizio è calcolata invertendo la formula della forometria della portata uscente e ponendola uguale alla $Q_{max}$:
+\begin{equation}
+    Q  = C_{eff} A_{\text{orifizio}} \sqrt{2 g h} \overset{!}{=} Q_{max} \quad .
+\end{equation}
+Si è scelto un coefficiente di efflusso $C_{eff} = \SI{0.65}{}$, avendo una bocca a battente a luce fissa e verticale. 
+Mentre l'area della vasca è calcolata dividendo il volume totale da invasare per la profondità della vasca di progetto $h = \SI{1.50}{\metre}$.
+
+Il volume totale da invasare è stato calcolato come sommatoria dell'area compresa tra le due curve (visibili in figura \ref{fig:vasche}) corrispondenti al deflusso nella condotta senza vasca e al deflusso attenuato dalla presenza della vasca. 
+Le funzioni delle curve sono state discretizzate con un intervallo di 60 secondi e la parte compresa tra loro è stata calcolata come differenza delle due aree sottese e ottenute tramite il metodo dei trapezi.
+\begin{figure}[p]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            %restrict x to domain=-0:1.5,
+            height=6.5cm,
+            width=15cm,
+            grid=major,
+            %xlabel=Tempo trascorso dall'inizio della precipitazione \si{[\hour]},
+            ylabel=Deflusso  \si{[\litre\per\second]},
+            xtick = {0,0.5,1,1.5,2,2.5,3,3.5,4},
+            title= \emph{Vasca 1 posta a monte della condotta C11},
+            /pgf/number format/.cd,
+            use comma,
+            1000 sep={\,}
+        ]
+        \addplot +[mark=none,style=solid,color=blue] table[x index=0,y index=1,header=false] {IMG/vasche/vasca1.txt};
+        \addplot +[mark=none,style=solid,color=orange] table[x index=0,y index=2,header=false] {IMG/vasche/vasca1.txt};
+        \node at (axis cs:1.4,160) [anchor=south west] {\SI{157.89}{\litre\per\second}};
+        \legend{Pre vasca, Post vasca}    
+        \end{axis}
+    \end{tikzpicture}
+
+    \vspace{.5cm}
+    %
+    \begin{tikzpicture}
+        \begin{axis}[
+            %restrict x to domain=-0:1.5,
+            height=6.5cm,
+            width=15cm,
+            grid=major,
+            %xlabel=Tempo trascorso dall'inizio della precipitazione \si{[\hour]},
+            ylabel=Deflusso  \si{[\litre\per\second]},
+            xtick = {0,0.5,1,1.5,2,2.5,3,3.5,4},
+            title= \emph{Vasca 2 posta a monte della condotta C21} ,
+            /pgf/number format/.cd,
+            use comma,
+            1000 sep={\,}
+        ]
+        \addplot +[mark=none,style=solid,color=blue] table[x index=0,y index=1,header=false] {IMG/vasche/vasca2.txt};
+        \addplot +[mark=none,style=solid,color=orange] table[x index=0,y index=2,header=false] {IMG/vasche/vasca2.txt};
+        \node at (axis cs:1.4,70) [anchor=south west] {\SI{63.92}{\litre\per\second}};
+        \legend{Pre vasca, Post vasca}    
+        \end{axis}
+    \end{tikzpicture}
+
+    \vspace{.5cm}
+    %
+    \begin{tikzpicture}
+        \begin{axis}[
+            %restrict x to domain=-0:1.5,
+            height=6.5cm,
+            width=15cm,
+            grid=major,
+            xlabel=Tempo trascorso dall'inizio della precipitazione \si{[\hour]},
+            ylabel=Deflusso  \si{[\litre\per\second]},
+            xtick = {0,0.5,1,1.5,2,2.5,3,3.5,4},
+            title= \emph{Vasca 3 posta a monte della condotta C29},
+            /pgf/number format/.cd,
+            use comma,
+            1000 sep={\,}
+        ]
+        \addplot +[mark=none,style=solid,color=blue] table[x index=0,y index=1,header=false] {IMG/vasche/vasca3.txt};
+        \addplot +[mark=none,style=solid,color=orange] table[x index=0,y index=2,header=false] {IMG/vasche/vasca3.txt};
+        \node at (axis cs:1.4,160) [anchor=south west] {\SI{147.66}{\litre\per\second}};
+        \legend{Pre vasca, Post vasca}    
+        \end{axis}
+    \end{tikzpicture}
+    %
+    \caption{Attenuazione del deflusso nelle tre condotte con l'introduzione delle vasche a monte delle condotte}
+    \label{fig:vasche}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+L'attenuazione del deflusso è stata calcolata partendo dalla $Q_{max}$ trovata nella formula \ref{eq:qmax} ed utilizzando la seguente legge
+\begin{equation}   
+    Q_{OUTflow}= 
+    \begin{cases}
+        Q_{INflow} & \text{se $Q_{INflow} \leq Q_{max}$}\\
+        Q_{max} & \text{se $Q_{INflow} > Q_{max}$}\\
+    \end{cases}
+\end{equation}
+
+I dati progettuali ottenuti con le considerazioni appena viste sono riportati in tabella \ref{tab:datiProgettoVasche}.
+\begin{table}[htb] 
+    \centering
+    \caption{Parametri per il progetto della vasca di laminazione}
+    \label{tab:datiProgettoVasche}
+    \begin{tabular}{lS[table-format=3.2]S[table-format=3.2]S[table-format=3.2]}
+        \toprule
+                                & \multicolumn{1}{c}{Nord}   & \multicolumn{1}{c}{Centro} & \multicolumn{1}{c}{Sud}    \\
+        \midrule
+        Area pertinenza vasca \si{[\hectare]}          & 7.89   & 3.20   & 7.38   \\
+        $Q_{max}$ \si{[\litre\per\second]} & 157.89 & 63.92  & 147.66 \\
+        Volume da invasare\si{[\metre\cubed]}               & 232.92 & 63.48  & 366.33 \\
+        Area vasca \si{[\square\metre]}                 & 155.28 & 42.32  & 244.22 \\
+        Area orifizio \si{[\square\metre]}        & 0.04   & 0.02   & 0.04   \\
+        Diametro orifizio   \si{[\metre]}   & 0.24   & 0.15   & 0.23   \\
+        \bottomrule
+\end{tabular}%
+\end{table}
+
+In tabella \ref{tab:iterazioni} sono riportate le varie iterazioni per ciascuna vasca  e con il grassetto si intende il valore di fine iterazione scelto. 
+Per questi sono inoltre riportati i restanti  parametri  della vasca ovvero il volume medio e il volume massimo di riempimento.
+\begin{table}[htb] 
+    \centering
+    \caption{Iterazioni dell'Altezza dell'orifizio e dell'Area della vasca per avere il massimo riempimento della vasca e mantenere la portata inferiore a quella massima. In grassetto sono indicate le scelte}
+    \label{tab:iterazioni}
+    \begin{tabular}{cS[table-format=1.2]S[table-format=3.0]S[table-format=3.0]S[table-format=3.2]}
+        \toprule
+                            & \multicolumn{1}{c}{Altezza \si{[\metre]}}    & \multicolumn{1}{c}{Area vasca \si{[\square\metre]}} & \multicolumn{1}{c}{\si{\percent} riempimento max} & \multicolumn{1}{c}{ Deflusso max \si{[\litre\per\second]}} \\
+                            \midrule
+    \multirow{5}{*}{Nord}   & 0.24 & 155  & 100   & 152.4            \\
+                            & 0.24 & 180  & 100   & 152.4            \\
+                            & 0.24 & 200  & 99    & 151.69           \\
+                            & {\bfseries{0.24}} & {\bfseries{210}}  & 96    & 148.98           \\
+                            & 0.25 & 210  & 93    & 158.4            \\
+                            \midrule
+    \multirow{3}{*}{Centro} & 0.15 & 45   & 100   & 60.49            \\
+                            & 0.15 & 60   & 88    & 56.53            \\
+                            & {\bfseries{0.15}} & {\bfseries{50}}   & 97    & 59.53            \\
+                            \midrule
+    \multirow{5}{*}{Sud}    & 0.23 & 245  & 100   & 140.22           \\
+                            & 0.23 & 260  & 100   & 140.22           \\
+                            & 0.23 & 300  & 100   & 140.22           \\
+                            & 0.23 & 350  & 91    & 132.99           \\
+                            & {\bfseries{0.23}} & {\bfseries{325}}  & 95    & 136.45           \\
+                            \bottomrule 
+    \end{tabular}%
+\end{table}
+
+In figura \ref{fig:volume} si confronta il deflusso allo sbocco delle tre reti di drenaggio con e senza vasca di laminazione, graficando l'andamento del volume d'acqua all'interno della vasca.
+Si può notare come nel caso di presenza della vasca, l'accumolo di acqua in essa contenuta faccia sì che diminuisca la portata defluita allo sbocco, ritardando inoltre il tempo di massimo deflusso. 
+\begin{figure}[p]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            restrict x to domain=-0:6,
+            height=6.5cm,
+            width=15cm,
+            grid=major,
+            %xlabel=Tempo trascorso dall'inizio della precipitazione \si{[\hour]},
+            ylabel=Deflusso  \si{[\litre\per\second]} e Volume  \si{[\metre\cubed]},
+            xtick = {0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6},
+            title= \emph{Vasca 1 posta a monte della condotta C11},
+            /pgf/number format/.cd,
+            use comma,
+            1000 sep={\,}
+        ]
+        \addplot +[mark=none,style=solid,color=red] table[x index=0,y index=1,header=false] {IMG/vasche/Volume1.txt};
+        \addplot +[mark=none,style=solid,color=blue] table[x index=0,y index=1,header=false] {IMG/vasche/vasca1.txt};
+        \addplot +[mark=none,style=solid,color=cyan] table[x index=0,y index=1,header=false] {IMG/vasche/Inflow1.txt};
+        
+        \legend{Volume vasca, Deflusso pre vasca, Deflusso post vasca }    
+        \end{axis}
+    \end{tikzpicture}
+
+    \vspace{.5cm}
+    %
+    \begin{tikzpicture}
+        \begin{axis}[
+            restrict x to domain=-0:6,
+            height=6.5cm,
+            width=15cm,
+            grid=major,
+            %xlabel=Tempo trascorso dall'inizio della precipitazione \si{[\hour]},
+            ylabel=Deflusso  \si{[\litre\per\second]} e Volume  \si{[\metre\cubed]},
+            xtick = {0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6},
+            title= \emph{Vasca 2 posta a monte della condotta C21},
+            /pgf/number format/.cd,
+            use comma,
+            1000 sep={\,}
+        ]
+        \addplot +[mark=none,style=solid,color=red] table[x index=0,y index=1,header=false] {IMG/vasche/Volume2.txt};
+        \addplot +[mark=none,style=solid,color=blue] table[x index=0,y index=1,header=false] {IMG/vasche/vasca2.txt};
+        \addplot +[mark=none,style=solid,color=cyan] table[x index=0,y index=1,header=false] {IMG/vasche/Inflow2.txt};
+        
+        \legend{Volume vasca, Deflusso pre vasca, Deflusso post vasca }    
+        \end{axis}
+    \end{tikzpicture}
+
+    \vspace{.5cm}
+    %
+    \begin{tikzpicture}
+        \begin{axis}[
+            restrict x to domain=-0:6,
+            height=6.5cm,
+            width=15cm,
+            grid=major,
+            xlabel=Tempo trascorso dall'inizio della precipitazione \si{[\hour]},
+            ylabel=Deflusso  \si{[\litre\per\second]} e Volume  \si{[\metre\cubed]},
+            xtick = {0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6},
+            title= \emph{Vasca 3 posta a monte della condotta C29},
+            /pgf/number format/.cd,
+            use comma,
+            1000 sep={\,}
+        ]
+        \addplot +[mark=none,style=solid,color=red] table[x index=0,y index=1,header=false] {IMG/vasche/Volume3.txt};
+        \addplot +[mark=none,style=solid,color=blue] table[x index=0,y index=1,header=false] {IMG/vasche/vasca3.txt};
+        \addplot +[mark=none,style=solid,color=cyan] table[x index=0,y index=1,header=false] {IMG/vasche/Inflow3.txt};
+        
+        \legend{Volume vasca, Deflusso pre vasca, Deflusso post vasca }    
+        \end{axis}
+    \end{tikzpicture}
+    %
+    \caption{Confronto del deflusso allo sbocco della rete pre e post l'installazione delle vasche e andamento del volume d'acqua all'interno delle stesse}
+    \label{fig:volume}
+\end{figure}
+
+
