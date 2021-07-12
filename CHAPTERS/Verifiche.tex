@@ -1,0 +1,57 @@
+\chapter{Verifiche alle condotte}
+% riempimento
+% velocità
+% i f i feom
+% tau
+
+Il riempimento della condotta $G_\text{cond.}$ deve risultare 
+\begin{equation}
+    \SI{50}{\percent} \lessapprox G_\text{cond.} \lessapprox\SI{75}{\percent}
+\end{equation}
+
+
+\begin{equation}
+    \SI{0.5}{\metre\per\second} < V <  \SI{5}{\metre\per\second}
+\end{equation}
+
+Criterio di autopulizia
+\begin{equation}
+    \tau = \gamma \, R_H \, i_F > \SI{2}{\pascal}
+\end{equation}
+dove $\gamma$ è il peso specifico dell'acqua pari a \SI{1000}{\newton\per\metre\cubed}, $R_H$ è il raggio idraulico calcolato con la formula di BOH NUM e $i_f$ è la pendenza del fondo vista prima TAB.  
+\begin{align}
+    R_H &= \frac{D}{4} \, \frac{1 - \sin(\vartheta)}{\vartheta} \\
+    \vartheta &= 2 \, \arccos(1 - G_\text{cond.})
+\end{align}
+
+\begin{landscape}
+\begin{table}[htb] 
+    \centering
+    \caption{Parametri per il progetto della vasca di laminazione}
+    \label{tab:LinkFlow_Verifiche-MOD-LID}
+    \begin{tabular}{
+        c
+        S[table-format=1.1]
+        S[table-format=3.2]
+        c
+        S[table-format=1.2]
+        S[table-format=2.0]
+        S[table-format=1.4]
+        S[table-format=1.4]
+        S[table-format=1.4]
+        S[table-format=1.3]
+        S[table-format=1.2]c
+        @{}}
+        \toprule
+        \multicolumn{1}{c}{\multirow{3}{*}{Condotta}} & \multicolumn{1}{c}{\multirow{2}{*}{Diametro}} & \multicolumn{1}{c}{Flusso}                     & \multicolumn{1}{c}{Ora max} & \multicolumn{1}{c}{Massima} & \multicolumn{1}{c}{Riempimento} & \multicolumn{1}{c}{NOME} & \multicolumn{1}{c}{Raggio} & \multicolumn{1}{c}{Pend.} & \multicolumn{1}{c}{Pend.} & \multicolumn{1}{c}{Tensione } \\
+        %
+                                              &                                               & \multicolumn{1}{c}{massimo}                    & \multicolumn{1}{c}{flusso} & \multicolumn{1}{c}{velocità} & \multicolumn{1}{c}{massimo $G$} & \multicolumn{1}{c}{NOME $\vartheta$} & \multicolumn{1}{c}{idraulico $R_H$} & \multicolumn{1}{c}{fondo $i_F$} & \multicolumn{1}{c}{geometrica $i_G$} & \multicolumn{1}{c}{tangenziale $\tau$} \\
+        %
+                                              & \multicolumn{1}{c}{[\SI{}{\metre}]}           & \multicolumn{1}{c}{[\SI{}{\litre\per\second}]} & \multicolumn{1}{c}{[\SI{}{\hour}]} & \multicolumn{1}{c}{[\SI{}{\metre\per\second}]} & \multicolumn{1}{c}{[\SI{}{\percent}]} & \multicolumn{1}{c}{a} & \multicolumn{1}{c}{a} & \multicolumn{1}{c}{a} & \multicolumn{1}{c}{a} & \multicolumn{1}{c}{[\SI{}{\pascal}]} \\
+                                              \midrule
+        \input{IMG/LinkFlow-Verifiche-MOD-LID.tex} \\
+        \bottomrule
+\end{tabular}%
+\end{table}
+\end{landscape}
+ 
