@@ -76,7 +76,45 @@ numberstyle=\tiny,}
         \addcontentsline{toc}{chapter}{Elenco delle figure}
 \endgroup
 %
-
+%%%%%%%%%%
+%Comandi aggiunti:
+%%%%%%%%%%
+\newcommand{\TabellaVerificheLinkFLow}[3]{%
+\begin{landscape}
+\begin{table}[p] 
+    \centering
+    \caption{#1}
+    \label{#2}
+    \begin{tabular}{
+        c
+        S[table-format=1.1]
+        S[table-format=3.2]
+        c
+        S[table-format=1.2]
+        S[table-format=2.0]
+        S[table-format=1.4]
+        S[table-format=1.4]
+        S[table-format=1.4]
+        S[table-format=1.3]
+        S[table-format=1.2]c
+        @{}}
+        \toprule
+        \multicolumn{2}{c|}{} & \multicolumn{3}{c|}{Velocità} & \multicolumn{6}{c}{Riempimento e Autopulizia} \\
+        \midrule
+        %
+        \multicolumn{1}{c}{\multirow{3}{*}{Condotta}} & \multicolumn{1}{c}{\multirow{2}{*}{Diametro}} & \multicolumn{1}{c}{Flusso}                     & \multicolumn{1}{c}{Ora max}        & \multicolumn{1}{c}{Massima}                    & \multicolumn{1}{c}{Riempimento}       & \multicolumn{1}{c}{$\vartheta = $ }    & \multicolumn{1}{c}{Raggio}          & \multicolumn{1}{c}{Pend.}       & \multicolumn{1}{c}{Pend.}            & \multicolumn{1}{c}{Tensione } \\
+        %
+                                                      &                                               & \multicolumn{1}{c}{massimo}                    & \multicolumn{1}{c}{flusso}         & \multicolumn{1}{c}{velocità}                   & \multicolumn{1}{c}{massimo $G$}       & \multicolumn{1}{c}{compl. di $\alpha$} & \multicolumn{1}{c}{idraulico $R_H$} & \multicolumn{1}{c}{fondo $i_F$} & \multicolumn{1}{c}{geometrica $i_G$} & \multicolumn{1}{c}{tangenziale $\tau$} \\
+        %
+                                                      & \multicolumn{1}{c}{[\SI{}{\metre}]}           & \multicolumn{1}{c}{[\SI{}{\litre\per\second}]} & \multicolumn{1}{c}{[\SI{}{\hour}]} & \multicolumn{1}{c}{[\SI{}{\metre\per\second}]} & \multicolumn{1}{c}{[\SI{}{\percent}]} & \multicolumn{1}{c}{[\SI{}{rad}]}       & \multicolumn{1}{c}{[\SI{}{\metre}]} & \multicolumn{1}{c}{[--]}        & \multicolumn{1}{c}{[--]}             & \multicolumn{1}{c}{[\SI{}{\pascal}]} \\
+                                              \midrule
+        \input{#3} \\
+        \bottomrule
+\end{tabular}%
+\end{table}
+\end{landscape}
+}
+%%%%%%%%%%%%%%%%%%%%%%%
 \input{CHAPTERS/chap1.tex}
 \input{CHAPTERS/Verifiche.tex}
 \input{CHAPTERS/vasche.tex}
