@@ -15,6 +15,13 @@ left=2.5cm,right=2.5cm,heightrounded,bindingoffset=0mm}
 \usepackage{pdfpages} %Per gli allegati
 %\usepackage{minipage}
 \usepackage[output-decimal-marker={,}]{siunitx}
+%ILe tre righe sotto ervono per mettere il grassetto dentro la tabelle siunitex usando \B, il rosso usando \RED, e il verde usando \GREEN
+\sisetup{detect-weight,mode=text}
+\usepackage{etoolbox}
+\newrobustcmd\B{\DeclareFontSeriesDefault[rm]{bf}{b}\bfseries}
+\newrobustcmd\RED{\DeclareFontSeriesDefault[rm]{bf}{b}\color{red}}
+\newrobustcmd\GREEN{\DeclareFontSeriesDefault[rm]{bf}{b}\color{myGreen}}
+%%
 \usepackage{tikz}
 \usepackage{pgfplots,pgfplotstable}
 %\pgfplotsset{compat=1.15} %indica la versione da utilizzare per pgfplot
@@ -45,6 +52,7 @@ left=2.5cm,right=2.5cm,heightrounded,bindingoffset=0mm}
 %serve per mettere il codice con lo sfondo grigio chiaro
 \definecolor{pantone186}{RGB}{206, 17, 38} %il colore del logo UNITN
 \definecolor{myGray}{gray}{0.5} %più basso più scuro è
+\definecolor{myGreen}{rgb}{0.0, 0.5, 0.0}
 \usepackage{listings} 
 \lstset{basicstyle=\scriptsize\ttfamily,
 backgroundcolor=\color{lightgray},%
@@ -79,6 +87,8 @@ numberstyle=\tiny,}
 %%%%%%%%%%
 %Comandi aggiunti:
 %%%%%%%%%%
+\newcommand{\red}[1]{\textcolor{pantone186}{#1}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\TabellaDiametriCondotte}[3]{%
 \begin{table}[p]
         %\small
@@ -141,7 +151,7 @@ numberstyle=\tiny,}
 \end{landscape}
 }
 %%%%%%%%%%%%%%%%%%%%%%%
-%\input{CHAPTERS/chap1.tex}
+\input{CHAPTERS/chap1.tex}
 \input{CHAPTERS/Verifiche.tex}
-%\input{CHAPTERS/vasche.tex}
+
 \end{document}
