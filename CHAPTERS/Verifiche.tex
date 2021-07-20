@@ -1,15 +1,52 @@
 \chapter{Rete di smaltimento delle acque meteoriche allo stato di progetto (con presenza
 della rete di drenaggio)}
-BLA BLA BLA su cosa ci sarà in questo capitolo e rimando all'appendice
+Analizzato quindi il deflusso dei sottobacini presenti nell'area di lavoro, si passa ora alla fase progettuale della rete di drenaggio. 
+Tale progettazione sarà suddivisa in tre fasi principali in quanto si è voluto studiare tre casistiche di intervento: una rete di drenaggio composta da sole condotte e tombini, la precedente rete con l'aggiunta di sistemi di laminazione puntuale ed infine l'ulteriore aggiunta di sistemi di laminazione diffusi.
+
+Dato il procedimento iterativo che compone ciascuna fase e il relativo aggiustamento dimensionale delle condotte (dovuto ad esempio  a sottobacini troppo piccoli e verifiche non soddisfatte, ecc) oppure della ri-progettazione della rete con solo i sistemi diffusi (per ottimizzare la dimensione delle condotte) e successiva aggiunta dei sistemi puntuali, si è voluto riportare in questo capitolo solo i risultati delle tre fasi principali sopra descritte e di  riportare invece le fasi intermedie nell'appendice \ref{appendix:FasiIntermedie} a pagina \pageref{appendix:FasiIntermedie}. 
+
+Di seguito verranno dapprima riportati i passaggi che contraddistinguono il dimensionamento e la verifica delle condotte in comune di ciascuna fase, per poi concentrarsi su ciascuna casistica riportando i risultati in forma per lo più tabellare o grafica.
+
 \section{Procedimento per il progetto e verifica}
-Tutte le varie formule usate per ottenere il Diamoetro da usare, offset e tutte quelle di verifica.
+\subsection{Profondità scavo}
+Una volta scelto il percorso i collegamenti ai tombini delle condotte si deve fare in modo di allineare ciascuna di esse al cielo. 
+Questo per consuetudine italiana in cui si vuole avere più facilità di manutenzione e di posa degli strati in sommità delle condotte. 
+Occorre quindi ipotizzare una pendenza  $i_G^{prog}$  di primo tentativo delle condotte e successivamente calcolare la profondità di scavo (\emph{Max Depth})data dalla differenza tra la quota del terreno e la quota di fondo.
+La quota del terreno la si ottiene dai dati altimetrici dell'area (con QGIS), mentre la quota di fondo è data dalla somma (da valle a monte) dei dislivelli $\Delta h = i_G^{prog} \cdot L_{\text{condotta}}$ di ciascun tratto, partendo dalla quota nota dei recapiti finali (chiamati R1, R2, R3 nelle tabelle e nelle figure che seguiranno d'ora in poi).
+
+Si ottiene così per ogni tratto una \emph{Max Depth} che deve essere
+\begin{equation}
+    \SI{1.5}{\metre} \lessapprox Max Depth \lessapprox\SI{6.5}{\metre}
+\end{equation}
+in modo di avere da un lato un ricoprimento minimo delle condotte tale che non si danneggino con il carico di veicoli, persone o intemperie;  dall'altro un ricoprimento contenuto da non avere costi di scavo troppo elevati. 
+Per stare all'interno di tale intervallo si va ad agire sulla pendenza di progetto delle condotte, o su eventuali sistemi di rinforzo delle stesse.
 \subsection{Diametro}
+Condotte circolari.
+beta = h/d = 0.75 riempimenti ideale
+ipotesi moto uniforme. 
+Nome formule
+\begin{equation}
+    Q(\beta) 
+    = A(\beta) \, K_S \, R^{\tfrac{2}{3}} \, i^{\tfrac{1}{2}} 
+    = \frac{ D \, K_S \, f(\beta)^{\tfrac{5}{3}} \, i^{\tfrac{1}{2}} }{ 2^{\tfrac{13}{3}} \, g(\beta)^{\tfrac{2}{3}} }
+\end{equation}
+dove 
+\begin{align}
+    f(\beta) &= \pi - 2 \alpha - 2 (1 - 2 \beta) \cos(\alpha) \\
+    g(\beta) &= \pi - 2 \alpha \\
+    \alpha &= \arcsin(1 - 2 \beta)
+\end{align}
+e dalla quale si ricava il diametro minimo per il riempimento $\beta = \hat{\beta}$ fissato, avendo nota la portata $Q$ pari al deflusso a monte di tale condotta
+\begin{equation}
+    D_{prog}(\hat{\beta}) = \frac{ 2^{\tfrac{13}{8}} \, g(\hat{\beta})^{\tfrac{1}{4}} }{     K_S^{\tfrac{3}{8}} \, f(\hat{\beta})^{\tfrac{5}{8}} } \frac{Q^{\tfrac{3}{8}}}{i^{\tfrac{3}{16}}}
+\end{equation} \quad .
+
+Da tale diametro minimo se ne va a scegliere uno di sezione immediatamente superiore -- o al più di poco inferiore, a causa delle verifiche di riempimento nel capitolo successivo -- disponibile commercialmente.
+
+Infine si calcola per ogni tratto la differenza di dimensione tra la condotta con diametro maggiore e tutte le altre, in modo da inserirle in SWMM e ottenere l'allineamento al cielo.
+
 \subsection{Riporto in SWMM}
 \subsection{Verifiche alle condotte}
-% riempimento
-% velocità
-% i f i feom
-% tau
 Il riempimento della condotta $G_\text{cond.}$ deve risultare 
 \begin{equation}
     \SI{50}{\percent} \lessapprox G_\text{cond.} \lessapprox\SI{75}{\percent}
@@ -36,7 +73,7 @@ dove $\gamma$ è il peso specifico dell'acqua pari a \SI{1000}{\newton\per\metre
 
 
 \section{Progetto}
-Tabella \ref{tab:Nodi_nodes-mod} 
+Il procedimento sopra descritto è stato pertanto applicato durante il progetto, talvonta iterando i valori quali la ppendenza di progetto i 
 
 \TabellaNodi{Nodi nodes-mod}{tab:Nodi_nodes-mod}{IMG/Nodi-nodes-mod.tex}
 \TabellaDiametriCondotte{Diametri progetti conduct-mod}{tab:Diametri_conduct-mod}{IMG/Diametri-conduct-mod.tex}
@@ -52,6 +89,7 @@ DA SISTEMARE IL CONDUCT2
 \appendix
 \chapter{Rete di smaltimento delle acque meteoriche allo stato di progetto (con presenza
 della rete di drenaggio) - tutti i mancanti}
+\label{appendix:FasiIntermedie}
 \section{Progetto sbagliato}
 \section{Progetto con solo i LID}
 \TabellaDiametriCondotte{Diametri progetti conduct-mod LID. In verde sono indicati i valori che hanno subito una modifica rispetto al progetto senza LID}{tab:Diametri_conduct-mod-LID}{IMG/Diametri-conduct-mod-LID.tex}
