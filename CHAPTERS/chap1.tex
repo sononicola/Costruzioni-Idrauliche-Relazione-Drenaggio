@@ -1,13 +1,13 @@
 \chapter{nome capitlo 1}
 \begin{figure}[p]
     \centering
-    \includegraphics[trim=0cm 0cm 0cm 0cm,clip,frame,width=\textwidth]{IMG/Inquadramento_Generale_scala1-10000.pdf} 
+    \includegraphics[trim=0cm 0cm 0cm 0cm,clip,frame,width=0.9\textwidth]{IMG/Inquadramento_Generale_scala1-10000.pdf} 
     \caption{Inquadramento dell'area di lavoro  TANTE BELLE COSE}
     \label{fig:inquadramentoGenerale}
 \end{figure}
 \begin{figure}[p]
     \centering
-    \includegraphics[trim=0cm 0cm 0cm 0cm,clip,frame,width=\textwidth]{IMG/Inquadramento_scala1-2800.pdf} 
+    \includegraphics[trim=0cm 0cm 0cm 0cm,clip,frame,width=0.9\textwidth]{IMG/Inquadramento_scala1-2800.pdf} 
     \caption{Inquadramento dell'area di lavoro TROPPE  COSE BELLE}
     \label{fig:inquadramentoDettaglio}
 \end{figure}
@@ -101,10 +101,72 @@ Dove $T_{\text{dry}}$ sono i giorni che impiega il suolo completamente saturo a 
                 use comma,
                 1000 sep={\,}
             ]
-            \addplot +[mark=none,style=solid,color=red] table[x index=0,y index=1,header=false] {IMG/Total-Inflow/total_inflow_5min_Chicago_25anni.txt};
+            \addplot +[mark=none,style=solid,color=red] table[x index=0,y index=1,header=false] {IMG/Total-Inflow/total_inflow_5min_Chicago_25anni-barato.txt};
             \end{axis}
         \end{tikzpicture}
         \caption{Andamento dello sforzo assiale agente sul pilastro P27 in funzione dell'altezza}
         \label{fig:IetogrammaFinale}
     \end{figure}   
 \end{landscape}
+
+\begin{landscape}
+    \begin{figure}[htb]
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                restrict x to domain=-0:120,
+                height=15cm,
+                width=21cm,
+                grid=major,
+                xlabel=Tempo trascorso dall'inizio della precipitazione \si{[\minute]},
+                %ylabel=Total Inflow  \si{[\litre\per\second]},
+                %xtick = {0,0.5,1,1.5,2,2.5,3,3.5,4},
+                %title= ,
+                /pgf/number format/.cd,
+                use comma,
+                1000 sep={\,}
+            ]
+            \addplot +[ybar,
+                mark=none,
+                enlargelimits=0.15
+                style=solid,
+                fill,
+                color=red,
+                xtick=data,
+                %nodes near coords,
+                %nodes near coords align={vertical}
+                ] 
+            table[x index=0,y index=1,header=false] {IMG/Total-Inflow/chicago.txt};
+            \end{axis}
+        \end{tikzpicture}
+        \caption{Andamento dello sforzo assiale agente sul pilastro P27 in funzione dell'altezza}
+        \label{fig:Chicago}
+    \end{figure}   
+\end{landscape}
+
+\begin{figure}[p]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            restrict x to domain=-0:4,
+            height=10cm,
+            width=15cm,
+            grid=major,
+            xlabel=Tempo trascorso dall'inizio della precipitazione \si{[\hour]},
+            ylabel=Deflusso  \si{[\litre\per\second]}},
+            xtick = {0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6}
+            /pgf/number format/.cd,
+            use comma,
+            1000 sep={\,}
+        ]
+        \addplot +[mark=none,style=solid,color=red] table[x index=0,y index=1,header=false] {IMG/Total-Inflow/deflussobarato_sottobacini_indicativi_25_20_18_6_4.txt};
+        \addplot +[mark=none,style=solid,color=green!60!black] table[x index=0,y index=2,header=false] {IMG/Total-Inflow/deflussobarato_sottobacini_indicativi_25_20_18_6_4.txt};
+        \addplot +[mark=none,style=solid,color=magenta] table[x index=0,y index=3,header=false] {IMG/Total-Inflow/deflussobarato_sottobacini_indicativi_25_20_18_6_4.txt};
+        \addplot +[mark=none,style=solid,color=cyan] table[x index=0,y index=4,header=false] {IMG/Total-Inflow/deflussobarato_sottobacini_indicativi_25_20_18_6_4.txt};
+        \addplot +[mark=none,style=solid,color=orange] table[x index=0,y index=5,header=false] {IMG/Total-Inflow/deflussobarato_sottobacini_indicativi_25_20_18_6_4.txt};
+        \legend{25,20,18,6,4 }    
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Deflusso dei sottobacini più significativi con lo ietogramma chicago come input}
+    \label{fig:DeflussoSottobaciniChicago}
+\end{figure}   
