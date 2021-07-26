@@ -19,7 +19,7 @@ Per elaborare queste analisi si impiega il software SWMM impostando un primo "pr
 Inizialmente si utilizza la figura \ref{fig:sottobacini} come sfondo su SWMM per il progetto di base andando ad inserire le coordinare che si sono ricavate precedentemente da QGIS.
 Con l'aiuto dello sfondo si riportano i sottobacini inserendo in ognuno i dati in precedenza dedotti, come l'area totale, la percentuale di area impermeabile, la pendenza media e la larghezza di drenaggio calcolata come rapporto tra area [\si{\square\metre}] e lunghezza di drenaggio media [\si{\metre}] (Vedi Tabella \ref{tab:dati}).
 
-\begin{table}[htbp]
+\begin{table}[htb]
     \centering
     \caption{Dati dei sottobacini ricavati da QGIS da inserire in SWMM.}
     \label{tab:dati}
@@ -89,11 +89,11 @@ Nel nostro caso si ha che risulta pari a \SI{4.76}{\days} per \emph{terriccio sa
 Quindi in base alla classe di terreno scelta precedentemente, si è preso in considerazione il valore di \SI{4.76}{\days}.
 
 Dopodiché per ciascuno di questi si è valutato solamente un recapito finale posto nel rivo Adigetto nella parte sud di Via Roberto da Sanseverino. 
-Facendo così tutti i sottobacini creati avranno lo stesso scarico di deflusso. (Figura \ref{fig:ProgettoBase})
+Facendo così tutti i sottobacini creati avranno lo stesso scarico di deflusso (Figura \ref{fig:ProgettoBase}).
 \begin{figure}[p]
     \centering
     \includegraphics[trim=0cm 0cm 0cm 0cm,clip,frame,width=0.9\textwidth]{IMG/ProgettoBase.pdf} 
-    \caption{progetto base  TANTE BELLE COSE}
+    \caption{Posizionamento del recapito finale per verificare il deflusso dei sottobacini}
     \label{fig:ProgettoBase}
 \end{figure}
 
@@ -110,7 +110,7 @@ Si riportano in tabella \ref{tab:ietocost} i valori delle intensità di pioggia 
 \begin{table}[htbp]
     %\small
     \centering
-    \caption{Intensità di precipitazione.}
+    \caption{Intensità di precipitazione in funzione della durata}
     \label{tab:ietocost}
     \begin{tabular}{S[table-format=3.0]S[table-format=1.2]S[table-format=3.4]}
         \toprule
@@ -140,19 +140,81 @@ Per iniziare sul progetto di base con lo scarico comune per ogni sottobacino si 
 Dopodiché impostando nel pluviometro lo ietogramma costante e la rispettiva durata eseguendo il programma si ricevono i dati di picco di deflusso, di infiltrazione, di deflusso totale e di quantità di precipitazione.
 Quest'ultima si può verificare facilmente dato che corrisponde all'intensità di pioggia moltiplicata per il rispettivo tempo di durata.
 
-Ottenuti tutti i dati degli ietogrammi costanti si analizza il deflusso di ciascuno andando a constatare quale curva dia il picco maggiore e di conseguenza sapere quale sia il tempo critico del bacino. {\RED{(Figura Nicola deflusso del bacino)}}
-
-Come si nota dalla figura {\RED{sopra/sotto}} il picco più gravoso e quindi l'evento meteorologico che influenza maggiormente l'area di studio si ha con una durata di pioggia di \SI{5}{\minute}.
+Ottenuti tutti i dati degli ietogrammi costanti si analizza il deflusso di ciascuno andando a constatare quale curva dia il picco maggiore e di conseguenza sapere quale sia il tempo critico del bacino (Figura \ref{fig:DeflussoBacinoIetogrammiCostanti}). 
+Come si nota da questa figura il picco più gravoso e quindi l'evento meteorologico che influenza maggiormente l'area di studio si ha con una durata di pioggia di \SI{5}{\minute}.
 Questo evento anche se molto breve per la nostra zona si può considerare come evento critico data la presenza di molte aree impermeabili e quindi l'area si trasforma subito in deflusso.
+
+\begin{figure}[htb]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            restrict x to domain=-0:1.5,
+            height=8cm,
+            width=\textwidth,
+            grid=major,
+            xlabel=Tempo trascorso dall'inizio della precipitazione \si{[\hour]},
+            ylabel=Deflusso  \si{[\litre\per\second]},
+            xtick = {0,0.5,1,1.5,2,2.5,3,3.5,4},
+            %title= ,
+            /pgf/number format/.cd,
+            use comma,
+            1000 sep={\,}
+        ]
+        \addplot +[mark=none,style=solid,color=red] table[x index=0,y index=1,header=false] {IMG/Total-Inflow/total_inflow_1min.txt};
+        \addplot +[mark=none,style=solid,color=green!60!black] table[x index=0,y index=1,header=false] {IMG/Total-Inflow/total_inflow_2min.txt};
+        \addplot +[mark=none,style=solid,color=magenta] table[x index=0,y index=1,header=false] {IMG/Total-Inflow/total_inflow_5min.txt};
+        \addplot +[mark=none,style=solid,color=cyan] table[x index=0,y index=1,header=false] {IMG/Total-Inflow/total_inflow_10min.txt};
+        \addplot +[mark=none,style=solid,color=orange] table[x index=0,y index=1,header=false] {IMG/Total-Inflow/total_inflow_15min.txt};
+        \addplot +[mark=none,style=solid,color=teal] table[x index=0,y index=1,header=false] {IMG/Total-Inflow/total_inflow_30min.txt};
+        \addplot +[mark=none,style=solid,color=violet] table[x index=0,y index=1,header=false] {IMG/Total-Inflow/total_inflow_45min.txt};
+        \legend{1 min,2 min,5 min,10 min,15 min,30 min,45 min}    
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Deflusso del bacino con l'utilizzo di ietogrammi costanti a diverse durate di pioggia. Il picco massimo è con durata di \SI{5}{\minute}}
+    \label{fig:DeflussoBacinoIetogrammiCostanti}
+\end{figure}
 
 Ora per migliorare la nostra analisi dell'evento meteorologico si valuta uno ietogramma Chicago che presenta andamenti temporali non costanti e che sia di durata paragonabile o comunque maggiore all'evento critico.
 Non avendo molto senso uno ietogramma Chicago pari al tempo critico di \SI{5}{\minute} dato che con un tempo così ridotto non si otterrebbero dati molto significativi, si impone una durata   $t_{\text{tot}} = \SI{2}{\hour}$, per sollecitare l'area gradualmente, e una posizione di picco $r$, che generalmente nei bacini urbani è compresa tra \SI{0.3} e \SI{0.5}, a \SI{0.5} per essere più cautelativi. 
 \begin{equation}
     t_\text{picco} = {r\,t_\text{tot}}
 \end{equation}
-Facendo così la posizione del picco del deflusso risulterà a \SI{1}{\hour}.
-{\RED{Fig. ietogramma Chicago}}
-Discretizzando lo ietogramma Chicago ad intervalli di \SI{5}{\minute}, dalla figura {\RED{precedente}}, si osserva una prima fase di accumulo d'acqua, dove le depressioni superficiali iniziano a colmarsi, quindi prima del picco si ha che la zona è già stata in parte sollecitata.
+Facendo così la posizione del picco del deflusso risulterà a \SI{1}{\hour} come visibile nello ietrogramma Chicago riportato in figura \ref{fig:Chicago}.
+
+\begin{figure}[htb]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            restrict x to domain=-0:120,
+            height=6cm,
+            width=\textwidth,
+            grid=major,
+            xlabel=Tempo trascorso dall'inizio della precipitazione \si{[\minute]},
+            ylabel=Intensità di pioggia  \si{[\milli\metre\per\hour]},
+            %xtick = {0,0.5,1,1.5,2,2.5,3,3.5,4},
+            %title= ,
+            /pgf/number format/.cd,
+            use comma,
+            1000 sep={\,}
+        ]
+        \addplot +[ybar,
+            mark=none,
+            enlargelimits=0.15
+            style=solid,
+            fill,
+            color=pantone186,
+            xtick=data,
+            %nodes near coords,
+            %nodes near coords align={vertical}
+            ] 
+        table[x index=0,y index=1,header=false] {IMG/Total-Inflow/chicago.txt};
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Ietogramma Chicago con $T_R = 25$ anni}
+    \label{fig:Chicago}
+\end{figure}   
+
+Discretizzando lo ietogramma Chicago ad intervalli di \SI{5}{\minute}, dalla figura, si osserva una prima fase di accumulo d'acqua, dove le depressioni superficiali iniziano a colmarsi, quindi prima del picco si ha che la zona è già stata in parte sollecitata.
 La costruzione del ietogramma Chicago avviene attraverso le formule dell'altezza di pioggia $h(t)$ pre e post picco e l'intensità di pioggia media $i_m$, che risulterà costante a tratti di \SI{5}{\minute}.
 \begin{equation}
 \label{eq:altezza}
@@ -220,106 +282,43 @@ Si osserva dalla figura {\RED{precedente}} dei deflusso dei sottobacini come var
 Quest'ultima genera un picco maggiore del deflusso, mentre le aree verdi e una grandezza ridotta del sottobacino danno vita a un picco di deflusso minore.
  
 
-\begin{landscape}
-    \begin{figure}[htb]
-        \centering
-        \begin{tikzpicture}
-            \begin{axis}[
-                restrict x to domain=-0:1.5,
-                height=15cm,
-                width=21cm,
-                grid=major,
-                xlabel=Tempo trascorso dall'inizio della precipitazione \si{[\hour]},
-                ylabel=Deflusso  \si{[\litre\per\second]},
-                xtick = {0,0.5,1,1.5,2,2.5,3,3.5,4},
-                %title= ,
-                /pgf/number format/.cd,
-                use comma,
-                1000 sep={\,}
-            ]
-            \addplot +[mark=none,style=solid,color=red] table[x index=0,y index=1,header=false] {IMG/Total-Inflow/total_inflow_1min.txt};
-            \addplot +[mark=none,style=solid,color=green!60!black] table[x index=0,y index=1,header=false] {IMG/Total-Inflow/total_inflow_2min.txt};
-            \addplot +[mark=none,style=solid,color=magenta] table[x index=0,y index=1,header=false] {IMG/Total-Inflow/total_inflow_5min.txt};
-            \addplot +[mark=none,style=solid,color=cyan] table[x index=0,y index=1,header=false] {IMG/Total-Inflow/total_inflow_10min.txt};
-            \addplot +[mark=none,style=solid,color=orange] table[x index=0,y index=1,header=false] {IMG/Total-Inflow/total_inflow_15min.txt};
-            \addplot +[mark=none,style=solid,color=teal] table[x index=0,y index=1,header=false] {IMG/Total-Inflow/total_inflow_30min.txt};
-            \addplot +[mark=none,style=solid,color=violet] table[x index=0,y index=1,header=false] {IMG/Total-Inflow/total_inflow_45min.txt};
-            \legend{1 min,2 min,5 min,10 min,15 min,30 min,45 min}    
-            \end{axis}
-        \end{tikzpicture}
-        \caption{Deflusso del bacino}
-        \label{fig:Ietogrammi}
-    \end{figure}
-\end{landscape}
 
-\begin{landscape}
-    \begin{figure}[htb]
-        \centering
-        \begin{tikzpicture}
-            \begin{axis}[
-                restrict x to domain=-0:4,
-                height=15cm,
-                width=21cm,
-                grid=major,
-                xlabel=Tempo trascorso dall'inizio della precipitazione \si{[\hour]},
-                ylabel=Total Inflow  \si{[\litre\per\second]},
-                xtick = {0,0.5,1,1.5,2,2.5,3,3.5,4},
-                %title= ,
-                /pgf/number format/.cd,
-                use comma,
-                1000 sep={\,}
-            ]
-            \addplot +[mark=none,style=solid,color=red] table[x index=0,y index=1,header=false] {IMG/Total-Inflow/total_inflow_5min_Chicago_25anni-barato.txt};
-            \node at (axis cs:1.2,2600) [anchor=south west] {\SI{2610.67}{\litre\per\second}};
-            \end{axis}
-        \end{tikzpicture}
-        \caption{Andamento dello sforzo assiale agente sul pilastro P27 in funzione dell'altezza}
-        \label{fig:IetogrammaFinale}
-    \end{figure}   
-\end{landscape}
 
-\begin{landscape}
-    \begin{figure}[htb]
-        \centering
-        \begin{tikzpicture}
-            \begin{axis}[
-                restrict x to domain=-0:120,
-                height=15cm,
-                width=21cm,
-                grid=major,
-                xlabel=Tempo trascorso dall'inizio della precipitazione \si{[\minute]},
-                %ylabel=Total Inflow  \si{[\litre\per\second]},
-                %xtick = {0,0.5,1,1.5,2,2.5,3,3.5,4},
-                %title= ,
-                /pgf/number format/.cd,
-                use comma,
-                1000 sep={\,}
-            ]
-            \addplot +[ybar,
-                mark=none,
-                enlargelimits=0.15
-                style=solid,
-                fill,
-                color=red,
-                xtick=data,
-                %nodes near coords,
-                %nodes near coords align={vertical}
-                ] 
-            table[x index=0,y index=1,header=false] {IMG/Total-Inflow/chicago.txt};
-            \end{axis}
-        \end{tikzpicture}
-        \caption{Andamento dello sforzo assiale agente sul pilastro P27 in funzione dell'altezza}
-        \label{fig:Chicago}
-    \end{figure}   
-\end{landscape}
 
-\begin{figure}[p]
+
+\begin{figure}[htbp]
     \centering
     \begin{tikzpicture}
         \begin{axis}[
             restrict x to domain=-0:4,
-            height=10cm,
-            width=15cm,
+            height=8cm,
+            width=\textwidth,
+            grid=major,
+            xlabel=Tempo trascorso dall'inizio della precipitazione \si{[\hour]},
+            ylabel=Deflusso  \si{[\litre\per\second]},
+            xtick = {0,0.5,1,1.5,2,2.5,3,3.5,4},
+            %title= ,
+            /pgf/number format/.cd,
+            use comma,
+            1000 sep={\,}
+        ]
+        \addplot +[mark=none,style=solid,color=red] table[x index=0,y index=1,header=false] {IMG/Total-Inflow/total_inflow_5min_Chicago_25anni-barato.txt};
+        \node at (axis cs:1.2,2550) [anchor=south west] {\SI{2610.67}{\litre\per\second}};
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Ideogramma di piena in uscita con indicazione del picco in riferimento allo scarico di figura \ref{fig:ProgettoBase}}
+    \label{fig:IdeogrammaPiena}
+\end{figure}   
+
+
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            restrict x to domain=-0:4,
+            height=8cm,
+            width=\textwidth,
             grid=major,
             xlabel=Tempo trascorso dall'inizio della precipitazione \si{[\hour]},
             ylabel=Deflusso  \si{[\litre\per\second]},
