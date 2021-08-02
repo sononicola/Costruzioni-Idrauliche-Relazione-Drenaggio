@@ -1,5 +1,5 @@
 \chapter{Rete di smaltimento delle acque meteoriche allo stato di progetto (con presenza
-della rete di drenaggio)}
+della rete di drenaggio)} \label{cap:ProgettoRete}
 Analizzato quindi il deflusso dei sottobacini presenti nell'area di lavoro, si passa ora alla fase progettuale della rete di drenaggio. 
 Tale progettazione sarà suddivisa in tre fasi principali in quanto si è voluto studiare tre casistiche di intervento: una rete di drenaggio composta da sole condotte e tombini, la precedente rete con l'aggiunta di sistemi di laminazione puntuale ed infine l'ulteriore aggiunta di sistemi di laminazione diffusi.
 
@@ -8,23 +8,33 @@ Dato il procedimento iterativo che compone ciascuna fase e il relativo aggiustam
 Di seguito verranno dapprima riportati i passaggi che contraddistinguono il dimensionamento e la verifica delle condotte in comune di ciascuna fase, per poi concentrarsi su ciascuna casistica riportando i risultati in forma per lo più tabellare o grafica.
 
 \section{Procedimento per il progetto e verifica}
+Data la necessità di conoscere il volume di riempimento delle condotte, la presenza di rigurgito o di moto in pressione è necessario cambiare le modalità di calcolo per la risoluzione della rete.
+Nelle ipotesi di moto vario a superficie libera monodimensionale e con condotte di piccola pendenza, gradualmente variato e con fluido incomprimibile si utilizza ora il metodo dell'\emph{Onda Dinamica} che consiste nel considerare tutti i termini dell'equazione di De Saint Venant \ref{eq:saintvenant} relativa alla conservazione della quantità di moto, senza perciò trascurare quelli relativi al gradiente di pressione (come nel metodo dell'\emph{Onda Cinematica} visto prima in cui si era posto $S_0 = S_f$) e i termini inerziali. 
+\begin{equation}
+    \label{eq:saintvenant}
+    \frac{\partial Q}{\partial t} + \frac{\partial}{\partial x} \left( \frac{Q^2}{A} \right) + g A \frac{\partial y}{\partial x} - g A (S_0 - Sf) = 0
+ \end{equation}
+
 \subsection{Profondità scavo}
-Una volta scelto il percorso i collegamenti ai tombini delle condotte si deve fare in modo di allineare ciascuna di esse al cielo. 
-Questo per consuetudine italiana in cui si vuole avere più facilità di manutenzione e di posa degli strati in sommità delle condotte. 
-Occorre quindi ipotizzare una pendenza  $i_G^{prog}$  di primo tentativo delle condotte e successivamente calcolare la profondità di scavo (\emph{Max Depth})data dalla differenza tra la quota del terreno e la quota di fondo.
-La quota del terreno la si ottiene dai dati altimetrici dell'area (con QGIS), mentre la quota di fondo è data dalla somma (da valle a monte) dei dislivelli $\Delta h = i_G^{prog} \cdot L_{\text{condotta}}$ di ciascun tratto, partendo dalla quota nota dei recapiti finali (chiamati R1, R2, R3 nelle tabelle e nelle figure che seguiranno d'ora in poi).
+Una volta scelto il percorso delle condotte e dei relativi tombini di collegamento, si deve fare in modo di allineare ciascuna di esse al cielo: 
+questo per consuetudine italiana in cui si vuole avere più facilità di manutenzione e di posa degli strati in sommità delle condotte. 
+Occorre quindi ipotizzare una pendenza delle condotte $i_G^{prog}$ di primo tentativo e successivamente calcolare la profondità di scavo (\emph{Max Depth}) data dalla differenza tra la quota del terreno e la quota di fondo.
+La quota del terreno la si ottiene dai dati altimetrici dell'area (estratti usando QGIS), mentre la quota di fondo è data dalla somma, da valle a monte, dei dislivelli $\Delta h = i_G^{prog} \cdot L_{\text{condotta}}$ di ciascun tratto, partendo dalla quota nota dei recapiti finali (chiamati R1, R2, R3 nelle tabelle e nelle figure che seguiranno d'ora in poi).
 
 Si ottiene così per ogni tratto una \emph{Max Depth} che deve essere
 \begin{equation}
-    \SI{1.5}{\metre} \lessapprox Max Depth \lessapprox\SI{6.5}{\metre}
-\end{equation}
+    \SI{1.5}{\metre} \lessapprox Max Depth \lessapprox\SI{6.5}{\metre}\quad ,
+\end{equation} 
 in modo di avere da un lato un ricoprimento minimo delle condotte tale che non si danneggino con il carico di veicoli, persone o intemperie;  dall'altro un ricoprimento contenuto da non avere costi di scavo troppo elevati. 
-Per stare all'interno di tale intervallo si va ad agire sulla pendenza di progetto delle condotte, o su eventuali sistemi di rinforzo delle stesse.
+Per stare all'interno di tale intervallo si va ad agire sulla pendenza di progetto delle condotte o, eventualmente, su sistemi di rinforzo delle stesse.
 \subsection{Diametro}
-Condotte circolari.
-beta = h/d = 0.75 riempimenti ideale
-ipotesi moto uniforme. 
-Nome formule
+Con le ipotesi di moto sopra dette, si deve progettare la dimensione delle condotte facendo in modo di rispettare il loro riempimento così da rimanere all'interno delle ipotesi. 
+Per questo si è imposto un riempimento ideale $\hat{\beta}$ del \SI{75}{\percent}
+\begin{equation}
+    \hat{\beta} = \frac{h}{d} = \SI{0.75}{}
+\end{equation}
+
+Dalla formula di TIZIO applicata al caso di condotte a sezione circolare e in riferimento alla nomenclatura di figura CAIA si ha tale legge che esprime la portata in funzione del riempimento:
 \begin{equation}
     Q(\beta) 
     = A(\beta) \, K_S \, R^{\tfrac{2}{3}} \, i^{\tfrac{1}{2}} 
@@ -36,10 +46,10 @@ dove
     g(\beta) &= \pi - 2 \alpha \\
     \alpha &= \arcsin(1 - 2 \beta)
 \end{align}
-e dalla quale si ricava il diametro minimo per il riempimento $\beta = \hat{\beta}$ fissato, avendo nota la portata $Q$ pari al deflusso a monte di tale condotta
+e dalla quale si può ricavare il diametro minimo per il riempimento $\beta = \hat{\beta}$ fissato, avendo nota la portata $Q$ pari al deflusso a monte di tale condotta:
 \begin{equation}
-    D_{prog}(\hat{\beta}) = \frac{ 2^{\tfrac{13}{8}} \, g(\hat{\beta})^{\tfrac{1}{4}} }{     K_S^{\tfrac{3}{8}} \, f(\hat{\beta})^{\tfrac{5}{8}} } \frac{Q^{\tfrac{3}{8}}}{i^{\tfrac{3}{16}}}
-\end{equation} \quad .
+    D_{prog}(\hat{\beta}) = \frac{ 2^{\tfrac{13}{8}} \, g(\hat{\beta})^{\tfrac{1}{4}} }{     K_S^{\tfrac{3}{8}} \, f(\hat{\beta})^{\tfrac{5}{8}} } \frac{Q^{\tfrac{3}{8}}}{i^{\tfrac{3}{16}}} \quad .
+\end{equation} 
 
 Da tale diametro minimo se ne va a scegliere uno di sezione immediatamente superiore -- o al più di poco inferiore, a causa delle verifiche di riempimento nel capitolo successivo -- disponibile commercialmente.
 
@@ -74,6 +84,9 @@ dove $\gamma$ è il peso specifico dell'acqua pari a \SI{1000}{\newton\per\metre
 
 \section{Progetto}
 Il procedimento sopra descritto è stato pertanto applicato durante il progetto, talvonta iterando i valori quali la ppendenza di progetto i 
+
+come abbiamo scelto il percorso, il Ks, CLS, ogni quanto abbiamo messo i tombini ecc
+i problemi con un tombino e la soluzione scelta
 
 \TabellaNodi{Nodi nodes-mod}{tab:Nodi_nodes-mod}{IMG/Nodi-nodes-mod.tex}
 \TabellaDiametriCondotte{Diametri progetti conduct-mod}{tab:Diametri_conduct-mod}{IMG/Diametri-conduct-mod.tex}
