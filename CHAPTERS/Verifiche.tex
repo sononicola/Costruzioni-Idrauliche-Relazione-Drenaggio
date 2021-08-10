@@ -18,8 +18,8 @@ Nelle ipotesi di moto vario a superficie libera monodimensionale e con condotte 
 \subsection{Profondità scavo}
 Una volta scelto il percorso delle condotte e dei relativi tombini di collegamento, si deve fare in modo di allineare ciascuna di esse al cielo: 
 questo per consuetudine italiana in cui si vuole avere più facilità di manutenzione e di posa degli strati in sommità delle condotte. 
-Occorre quindi ipotizzare una pendenza delle condotte $i_G^{prog}$ di primo tentativo e successivamente calcolare la profondità di scavo (\emph{Max Depth}) data dalla differenza tra la quota del terreno e la quota di fondo.
-La quota del terreno la si ottiene dai dati altimetrici dell'area (estratti usando QGIS), mentre la quota di fondo è data dalla somma, da valle a monte, dei dislivelli $\Delta h = i_G^{prog} \cdot L_{\text{condotta}}$ di ciascun tratto, partendo dalla quota nota dei recapiti finali (chiamati R1, R2, R3 nelle tabelle e nelle figure che seguiranno d'ora in poi).
+Occorre quindi ipotizzare una pendenza delle condotte $i_g^{prog}$ di primo tentativo e successivamente calcolare la profondità di scavo (\emph{Max Depth}) data dalla differenza tra la quota del terreno e la quota di fondo.
+La quota del terreno la si ottiene dai dati altimetrici dell'area (estratti usando QGIS), mentre la quota di fondo è data dalla somma, da valle a monte, dei dislivelli $\Delta h = i_g^{prog} \cdot L_{\text{condotta}}$ di ciascun tratto, partendo dalla quota nota dei recapiti finali (chiamati R1, R2, R3 nelle tabelle e nelle figure che seguiranno d'ora in poi).
 
 Si ottiene così per ogni tratto una \emph{Max Depth} che deve essere
 \begin{equation}
@@ -37,8 +37,8 @@ Per questo si è imposto un riempimento ideale $\hat{\beta}$ del \SI{75}{\percen
 Dalla formula di TIZIO applicata al caso di condotte a sezione circolare e in riferimento alla nomenclatura di figura CAIA si ha tale legge che esprime la portata in funzione del riempimento:
 \begin{equation}
     Q(\beta) 
-    = A(\beta) \, K_S \, R^{\tfrac{2}{3}} \, i^{\tfrac{1}{2}} 
-    = \frac{ D \, K_S \, f(\beta)^{\tfrac{5}{3}} \, i^{\tfrac{1}{2}} }{ 2^{\tfrac{13}{3}} \, g(\beta)^{\tfrac{2}{3}} }
+    = A(\beta) \, k_s \, R^{\tfrac{2}{3}} \, i^{\tfrac{1}{2}} 
+    = \frac{ D \, k_s \, f(\beta)^{\tfrac{5}{3}} \, i^{\tfrac{1}{2}} }{ 2^{\tfrac{13}{3}} \, g(\beta)^{\tfrac{2}{3}} }
 \end{equation}
 dove 
 \begin{align}
@@ -57,25 +57,37 @@ Infine si calcola per ogni tratto la differenza di dimensione tra la condotta co
 
 \subsection{Riporto in SWMM}
 \subsection{Verifiche alle condotte}
-Il riempimento della condotta $G_\text{cond.}$ deve risultare 
+Si deve ora verificare che le ipotesi fatte in fase progettuale siano state rispettate. 
+Riguardo al riempimento ideale $\hat \beta$ imposto si deve controllare che il riempimento della condotta $\beta_\text{cond.}$ risulti 
 \begin{equation}
-    \SI{50}{\percent} \lessapprox G_\text{cond.} \lessapprox\SI{75}{\percent}
+    \SI{50}{\percent} \lessapprox \beta_\text{cond.} \lessapprox\SI{75}{\percent}
 \end{equation}
 
-
+Seguendo le indicazioni del Consiglio Superiore dei Lavori Pubblici la velocità dell'acqua all'interno delle condotte deve essere:
 \begin{equation}
     \SI{0.5}{\metre\per\second} < V <  \SI{5}{\metre\per\second}
 \end{equation}
-
-Criterio di autopulizia
+Questo per non avere velocità troppo basse tali da formare dei sedimenti né velocità troppo elevate tali da danneggiare il materiale stesso delle condotte.
+In realtà, per verificare che non si creino sedimenti nel periodi di non-precipitazione e rispettare il cosidetto criterio di autopulizia, si è utilizzato anche un altro metodo che fa riferimento ad una tensione tangenziale al fondo $\tau$ minima oppure ad una pendenza del fondo (o idraulica) $i_f$ massima. 
+Ovvero si deve avere:
 \begin{equation}
-    \tau = \gamma \, R_H \, i_F > \SI{2}{\pascal}
+    \label{eq:tau}
+    \tau = \gamma \, R_H \, i_g > \SI{2}{\pascal}
 \end{equation}
-dove $\gamma$ è il peso specifico dell'acqua pari a \SI{1000}{\newton\per\metre\cubed}, $R_H$ è il raggio idraulico calcolato con la formula di BOH NUM e $i_f$ è la pendenza del fondo vista prima TAB.  
+dove $\gamma$ è il peso specifico dell'acqua pari a \SI{1000}{\newton\per\metre\cubed}, $R_H$ è il raggio idraulico calcolato con la formula di BOH NUM e $i_g$ è la pendenza geometrica delle condotte.  
 \begin{align}
     R_H &= \frac{D}{4} \, \frac{1 - \sin(\vartheta)}{\vartheta} \\
-    \vartheta &= 2 \, \arccos(1 - G_\text{cond.})
+    \vartheta &= 2 \, \arccos(1 - \beta_\text{cond.})
 \end{align}
+O analogamente
+\begin{equation}
+    i_g > i_f  
+\end{equation}
+in cui dalla \ref{eq:tau} si ha 
+\begin{equation}
+    i_f = \frac{\tau}{R_H \, \gamma} \biggr|_{\tau=\SI{2}{\pascal}}
+\end{equation}    
+mentre $i_g$ rimane la pendenza geometrica delle condotte, la quale deve essere comunque almeno del \SI{0.5}{\percent}.
 
 
 
@@ -83,14 +95,50 @@ dove $\gamma$ è il peso specifico dell'acqua pari a \SI{1000}{\newton\per\metre
 
 
 \section{Progetto}
-Il procedimento sopra descritto è stato pertanto applicato durante il progetto, talvonta iterando i valori quali la ppendenza di progetto i 
+Il progetto della rete di drenaggio prevede tre rami principali ciascuno composto da altrettanti recapiti finali affluenti al canale Adigetto. 
+I rami principali delle condotte, visibili nel dettaglio in figura \ref{fig:Condotte} nella fase progettuale finale, sono posti a nord, centro e sud dell'area di studio in concomitanza dei tre recapiti $R1$, $R2$, $R3$ posti a quota prefissata di \SI{184.00}{}, \SI{183.70}{}, \SI{183.50}{\metre}.
+\begin{figure}[p]
+    \centering
+    \includegraphics[trim=0cm 0cm 0cm 0cm,clip,frame,width=0.9\textwidth]{IMG/Nomenclatura_condotte.pdf} 
+    \caption{Posizionamento e nomenclatura della rete di drenaggio con indicazione del deflusso dei sottobacini}
+    \label{fig:Condotte}
+\end{figure}
 
-come abbiamo scelto il percorso, il Ks, CLS, ogni quanto abbiamo messo i tombini ecc
-i problemi con un tombino e la soluzione scelta
+Il percorso delle reti cerca di sovrapporsi a strade o vicoli pre-esistenti in modo da non aumentare l'impatto ambientale e visivo. 
+Cerca inoltre di attraversare ogni sottobacino per confluire ad ognuno il defluso in un rispettivo tombino, idealmente a monte della condotta. 
+In questo modo si riesce a dimensionare con maggiore efficacia le tubazioni. 
+In aggiunta le condotte devono essere interrotte da un tombino di ispezione e non divenire più lunghe di \SI{100}{\metre}.
 
-\TabellaNodi{Nodi nodes-mod}{tab:Nodi_nodes-mod}{IMG/Nodi-nodes-mod.tex}
-\TabellaDiametriCondotte{Diametri progetti conduct-mod}{tab:Diametri_conduct-mod}{IMG/Diametri-conduct-mod.tex}
-\TabellaVerificheLinkFLow{Progetto -- Verifiche di massima velocità, riempimento condotta e del criterio di autopulizia}{tab:LinkFlow_Verifiche-MOD}{IMG/LinkFlow-Verifiche-MOD.tex}
+Per tutte le componenti della rete è stato usato calcestruzzo armato senza nessun particolare rivestimento per cui avendo condotte circolari con pareti non perfettamente liscie si è scelto un coefficiente di Gauckler-Strickler $k_s$ pari a \SI{80}{\metre\tothe{1/3}\per\second} -- equivalente ad un numero di Manning $n$ di \SI{0.0125}{\metre\tothe{1/3}\second}, avendo usato il software SWMM di concezione anglosassone.
+
+Il procedimento descritto nel paragrafo precedente è alla base dei dati tabulari di seguito esposti.  
+Nella tabella \ref{tab:Nodi_nodes-mod} è riportata la profondità di scavo in base alla pendenza scelta delle condotte. 
+Nella tabella successiva si ha il calcolo del diametro di progetto e la relativa scelta del diametro commerciale, facendo attenzione alle verifiche di riempimento e di velocità visibili invece nell'ultima tabella a seguire.
+
+Nel tombino $J13$ non riuscendo a rispettare la profondità di scavo minima di \SI{1.5}{\metre} ma essendo invece di \SI{0.85}{\metre} si prevede una soletta armata sopra il tombino e lungo parte delle due condotte ad esso collegate per evitare la rottura del calcestruzzo a taglio dovuto a carichi sovrastanti. 
+
+Nel caso delle condotta 18 e 21 si è scelto un diametro commerciale maggiore del dovuto per non avere scalini con le condotte a monte nei quali si accumolerebbero detriti. 
+
+In figura \ref{fig:ProfiliProgettoCondotte} a pagina \pageref{fig:ProfiliProgettoCondotte} è mostrato l'andamento del pelo libero dell'acqua all'interno delle condotte nel momento di massimo picco.
+
+Come si nota dalla figura \ref{fig:Condotte} alcuni sottobacini sono stati in realtà considerati uniti, facendo convogliare il deflusso nello stesso tombino.
+Questo perché con la disposizione iniziale non si soddisfava la verifica del riempimento minimo.
+La dispozione iniziale si può vedere in appendice \ref{appendix:FasiIntermedie} nella fi e LE TABELLE SBAGLIATE a pagina TOT.
+
+\TabellaNodi{Profondità di scavo dei tombini e pendenza progettuale delle condotte -- Progetto base con solo condotte}{tab:Nodi_nodes-mod}{IMG/Nodi-nodes-mod.tex}
+\TabellaDiametriCondotte{Diametro commerciale e offset per l'allineamento al cielo -- Progetto base con solo condotte}{tab:Diametri_conduct-mod}{IMG/Diametri-conduct-mod.tex}
+\TabellaVerificheLinkFLow{Verifiche massima velocità, riempimento e criterio di autopulizia -- Progetto base con solo condotte}{tab:LinkFlow_Verifiche-MOD}{IMG/LinkFlow-Verifiche-MOD.tex}
+\begin{figure}[p]
+    \centering
+    % \subfloat[][\emph{Campata 1\label{fig:MomentiUnitariA}}]
+    \subfloat[][\emph{Ramo di condotte tra il recapito finale 1 ed il tombino $J10$}]{\includegraphics[width=\textwidth]{IMG/ProgettoCondotte_profiloA.pdf}} \\
+    \subfloat[][\emph{Ramo di condotte tra il recapito finale 2 ed il tombino $J24$}]{\includegraphics[width=\textwidth]{IMG/ProgettoCondotte_profiloB.pdf}} \\
+    \subfloat[][\emph{Ramo di condotte tra il recapito finale 3 ed il tombino $J32$}]{\includegraphics[width=\textwidth]{IMG/ProgettoCondotte_profiloC.pdf}}
+\caption{Andamento del pelo libero dell'acqua all'interno delle condotte nell'instante di massimo picco -- Progetto base con solo condotte}
+\label{fig:ProfiliProgettoCondotte}
+\end{figure}
+
+\clearpage
 \section{Progetto con vasche}
 \input{CHAPTERS/vasche.tex}
 \section{Progetto con vasche e lid}
