@@ -1,20 +1,56 @@
 \chapter{Caratteristiche pluviometriche dell’area di studio}\label{cap:pluviometriche}
 \section{Curve di possibilità pluviometrica}
 Dopo che si è eseguito un primo inquadramento della zona si procede con le elaborazioni dei dati dei massimi annuali degli scrosci e delle precipitazioni orarie ricavate dalla stazione pluviometrica di Laste a Trento.
-Attraverso queste elaborazioni, svolte attraverso il metodo di BOOOOO(momenti o minimi quadrati o massima verosimiglianza) si pone l'obiettivo di determinare le curve di possibilità pluviometrica (Fig.2) e i propri parametri (Tab.1 (a[mm/h alla n];n)) con diversi tempi di ritorno ($T_r$). 
-Per la relazione si considera un tempo di ritorno pari a \si{25} anni. Nella Fig.2, dove si confrontano le CPP degli scrosci e delle precipitazioni orarie, si evince che si ottiene una maggiore altezza di precipitazione, dovuta agli scrosci, per le prime tre ore e mezza e poi le precipitazioni orarie superano gli scrosci. 
-Quindi per la seguente relazione si prenderanno in considerazione gli scrosci. 
-Si riporta la Tab.1 dei parametri con $T_r$=\si{25} anni per gli scrosci e le precipitazioni orarie:
+Attraverso queste elaborazioni si pone l'obiettivo di determinare le curve di possibilità pluviometrica (CPP) a diversi tempi di ritorno $T_r$.
+%(Tab.1 (a[mm/h alla n];n)).... svolte con il metodo di Gumbel momenti o minimi quadrati o massima verosimiglianza
+Per la progettazione successiva si è scelto un tempo di ritorno di pari a \SI{25}{anni}. 
 
-tab.1 fig.2
-
-per figure grafici CPP 
+Per graficare le CPP a tempo di ritorno assegnato occorre conoscere i parametri $a$ ed $n$ della loro equazione
 \begin{equation}
-    \label{eq:CPP}
-    h = a(T_r) \, t_p ^{n}
+    h = a\,(T_r) \, t_p ^{n}
 \end{equation}
 
-\begin{figure}[htb]
+Tali parametri sono ottenuti attraverso una regressione lineare tra le altezze di pioggia $h_c (T_r)$ e le durate di intensità di pioggia $t_p$. 
+I parametri $a$ ed $n$ sono rispettivamente il coefficiente angolare e l'intercetta di tale regressione, visualizzata in scala logaritmica a base 10. 
+
+Per calcolare le altezze di pioggia $h_c (T_r)$ si è fatto uso di tre metodi diversi all'interno della distribuzione di Gumbel, ovvero la probabilità di non superamento 
+\begin{equation}
+  P(X\leq x) = \exp{\left[-\exp{\left[-x \right]} \right]}
+\end{equation}
+ dove $x = \alpha ( h - u)$ mentre $h$ è il vettore con i massimi annuali relativi ad una specifica durata di precipitazione, ottenuti dalla stazione pluviometrica.
+
+I tre diversi metodi sono:
+\begin{itemize}
+\item dei momenti;
+\item dei minimi quadrati;
+\item della massima verosimiglianza.
+\end{itemize}
+Avendo quindi tre diversi parametri $\alpha$ ed $u$ (avendo usato tutti e tre i metodi), per scegliere la coppia di parametri migliore si è usato il test di Pearson o del $\chi ^2$.
+
+%si può verificare la validità delle distribuzioni ottenute tramite il test di Pearson che consiste in un test di significatività statistica.
+Fatto ciò si hanno i valori dell'altezza di precipitazione per ogni tempo di ritorno per una durata fissata. 
+Eseguendo il calcolo per ogni durata ed eseguendo la regressione lineare, si ottiene infine $a$ ed $n$ per poter graficare la CPP.
+
+Nelle figure \ref{fig:ConfrontoMetodi} e \ref{fig:Pearson} viene mostrato la distribuzione di Gumbel e il relativo test di Pearson per una durata $t_p$ fissata di un'ora.
+In figura \ref{fig:Regressione} è rappresentata la regressione lineare relativa ai due macro insiemi di durata (scrosci e orarie), ottenuta avendo fissato un tempo di ritorno di 25 anni. Da questo sono ottenuti i parametri $a$ ed $n$ riportati in tabella \ref{tab:parametriCPP} e da cui è stato rapresentato l'andamento delle due curve in figura \ref{fig:CPPFinale}.
+\begin{table}[htbp]
+    \centering
+    \caption{Parametri $a$ ed $n$ per la costruzione della CPP}
+    \label{tab:parametriCPP}
+    \begin{tabular}{cS[table-format=2.12]S[table-format=1.12]}
+            \toprule
+            & $a$ & $n$ \\
+            \midrule
+            Scrosci & 34.890380507987 & 0.380264379496 \\
+            Orarie & 32.123336325361 & 0.447173501027 \\ 
+            \bottomrule
+\end{tabular}
+\end{table}
+
+Da tale grafico si evince come si ottenga una maggiore altezza di precipitazione, dovuta agli scrosci, per le prime tre ore e mezza ($\hat{t}_p$) e poi le precipitazioni orarie superano gli scrosci. 
+Per il seguente progetto, che riguarda un breve lasso di tempo, si prenderanno in considerazione soltanto gli scrosci. 
+
+\begin{figure}[htbp]
     \centering
     \begin{tikzpicture}
         \begin{axis}[
@@ -40,10 +76,10 @@ per figure grafici CPP
         \end{axis}
     \end{tikzpicture}
     \caption{Confronto (a durata fissata) tra la frequenza campionaria e la probabilità di non superamento con i tre metodi della distribuzione di Gumbel}
-    \label{fig:COnfrontoMetodi}
+    \label{fig:ConfrontoMetodi}
 \end{figure}
 
-\begin{figure}[htb]
+\begin{figure}[htbp]
     \centering
     \begin{tikzpicture}
         \begin{axis}[
@@ -67,7 +103,7 @@ per figure grafici CPP
     \label{fig:Pearson}
 \end{figure}
 
-\begin{figure}[htb]
+\begin{figure}[htbp]
     \centering
     \begin{tikzpicture}
     \begin{groupplot}[
@@ -103,7 +139,7 @@ per figure grafici CPP
     \label{fig:Regressione}
 \end{figure}
 
-\begin{figure}[htb]
+\begin{figure}[htbp]
     \centering
     \begin{tikzpicture}
         \begin{axis}[
