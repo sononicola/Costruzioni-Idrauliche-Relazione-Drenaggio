@@ -215,18 +215,18 @@ Facendo così la posizione del picco del deflusso risulterà a \SI{1}{\hour} com
 \end{figure}   
 
 Discretizzando lo ietogramma Chicago ad intervalli di \SI{5}{\minute}, dalla figura, si osserva una prima fase di accumulo d'acqua, dove le depressioni superficiali iniziano a colmarsi, quindi prima del picco si ha che la zona è già stata in parte sollecitata.
-La costruzione del ietogramma Chicago avviene attraverso le formule dell'altezza di pioggia $h(t)$ pre e post picco e l'intensità di pioggia media $i_m$, che risulterà costante a tratti di \SI{5}{\minute}.
+La costruzione del ietogramma Chicago avviene attraverso le formule dell'altezza di pioggia $h(t_p)$ pre e post picco e l'intensità di pioggia media $i_m$, che risulterà costante a tratti di \SI{5}{\minute}.
 \begin{equation}
 \label{eq:altezza}
-    h(t) = 
+    h(t_p) = 
     \begin{cases}
-        r \, a \left[ \left( \frac{t_p}{r}\right)^n - \left( \frac{t_p - t}{r}\right)^n  \right] & \text{se $t < t_p$}\\
-        a \left[ r \left( \frac{t_p}{r}\right)^n + (1-r)\left( \frac{t_p - t}{1 - r}\right)^n  \right] & \text{se $t > t_p$}\\
+        r \, a \left[ \left( \frac{\hat{t}_p}{r}\right)^n - \left( \frac{\hat{t}_p - t_p}{r}\right)^n  \right] & \text{se $t_p < \hat{t}_p$}\\
+        a \left[ r \left( \frac{\hat{t}_p}{r}\right)^n + (1-r)\left( \frac{\hat{t}_p - t_p}{1 - r}\right)^n  \right] & \text{se $t_p > \hat{t}_p$}\\
     \end{cases}
 \end{equation}
 \begin{equation}
 \label{eq:imedia}
-    i_m = \frac{h(t_\text{fin}) - h(t_\text{in})}{\Delta t}
+    i_m = \frac{h(t_{p,\text{fin}}) - h(t_{p,\text{in}})}{\Delta t}
 \end{equation}
 Ricavati tutti i dati necessari dello ietogramma Chicago li si riportano nel programma SWMM per ottenere i risultati dell'area di studio.
 
