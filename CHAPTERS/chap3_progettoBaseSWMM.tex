@@ -232,11 +232,24 @@ Ricavati tutti i dati necessari dello ietogramma Chicago li si riportano nel pro
 
 \section{Risultati dell'analisi}
 %Riportare i risultati della simulazione idraulica mostrando l’idrogramma di piena in uscita dall’area di studio. Riportare in maniera esplicita il valore di colmo dell’onda di piena, il coefficiente di deflusso e il coefficiente udometrico nello stato di fatto (portata al colmo diviso area (l/s/ha). Riportare anche una breve valutazione del deflusso dei vari sottobacini.
-Eseguendo la simulazione idraulica {\RED{(attraverso il metodo dell'invaso lineare????)}} con SWMM con tempo di ritorno pari a 25 anni si sono riportati i dati significativi del progetto.
-
-Ideogramma di piena in uscita con indicazione del colmo: 
-
-tabella summery SWMM con coeffifiente di deflusso, coeff udumetrico.
+Per la determinazione dell'ideogramma di piena in uscita dell'area di studio, riportando anche il valore di colmo dell'onda di piena, si è applicato il metodo dell'invaso lineare. 
+Questo modello analizza il comportamento del bacino soggetto ad afflussi e deflussi dipendenti dal tempo e dalle caratteristiche idrauliche dello sbocco.
+Lo scopo del metodo è ricavare la legge dell'andamento delle portate uscenti nel corso del tempo.
+Per fare questo si prende in considerazione l'equazione di conservazione della massa:
+\begin{equation}
+    Q_\text{in} - Q_\text{out} = \frac{dV}{dt}
+\end{equation}
+dove $V$ è il volume invasato, $Q_\text{in}$ e $Q_\text{out}$ sono le portate in ingresso e in uscita e la prima di queste due si calcola come prodotto tra il coefficiente d’afflusso, l’intensità di pioggia e la superficie del bacino.
+Normalizzando l'equazione precedente si ottiene:
+\begin{equation}
+    \delta(t) - u(t) = \frac{d\nu}{dt}
+\end{equation}
+dove $\delta(t)$ è il delta di Dirac, cioè la risposta del sistema all'impulso unitario, $\nu$ è il volume normalizzato, che equivale al prodotto tra la portata uscente $u(t)$ e il tempo medio di resistenza $k$ dell'acqua all'interno del sistema.
+Per un tempo maggiore di zero come soluzione si ha che la funzione di trasferimento è:
+\begin{equation}
+    u(t) = \frac{1}{k} \, \exp{\left(-\frac{t}{k}\right)}
+\end{equation}
+%
 \begin{table}[htbp]
     %\small
     \centering
@@ -276,16 +289,6 @@ tabella summery SWMM con coeffifiente di deflusso, coeff udumetrico.
 \end{tabular}
 \end{table}
 
-{\RED{Figura dei deflusso dei sottobacini}}
-
-Si osserva dalla figura {\RED{precedente}} dei deflusso dei sottobacini come vari il deflusso in ciascuno di esso in base alla grandezza dei sottobacini, delle aree verdi e delle aree impermeabili presenti all'interno della sottoarea. 
-Quest'ultima genera un picco maggiore del deflusso, mentre le aree verdi e una grandezza ridotta del sottobacino danno vita a un picco di deflusso minore.
- 
-
-
-
-
-
 \begin{figure}[htbp]
     \centering
     \begin{tikzpicture}
@@ -309,8 +312,6 @@ Quest'ultima genera un picco maggiore del deflusso, mentre le aree verdi e una g
     \caption{Ideogramma di piena in uscita con indicazione del picco in riferimento allo scarico di figura \ref{fig:ProgettoBase}}
     \label{fig:IdeogrammaPiena}
 \end{figure}   
-
-
 
 \begin{figure}[htbp]
     \centering
@@ -338,3 +339,9 @@ Quest'ultima genera un picco maggiore del deflusso, mentre le aree verdi e una g
     \caption{Deflusso dei sottobacini più significativi con lo ietogramma chicago come input}
     \label{fig:DeflussoSottobaciniChicago}
 \end{figure}   
+Impostato tale modello in SWMM con tempo di ritorno pari a 25 anni si ottengono i risultati significativi dell'analisi del progetto fino ad ora.
+%Eseguendo la simulazione idraulica attraverso il metodo dell'invaso lineare, riportato sopra, con tempo di ritorno pari a 25 anni si sono riportati i dati significativi del progetto.
+Il primo si ha nell'ideogramma di piena in uscita con indicazione del picco di deflusso di figura \ref{fig:IdeogrammaPiena}.
+Dopodiché in tabella \ref{tab:afflussobase} si hanno per ogni sottobacino il coefficiente di deflusso e il coefficiente udometrico.
+Infine è riportato graficamente in figura \ref{fig:DeflussoSottobaciniChicago} l'andamento del deflusso per i sottobacini più significativi dalla quale si evince come vari il deflusso in base alla loro grandezza, alle aree verdi ed alle aree impermeabili presenti all'interno di ciascuno di essi. 
+Quest'ultima se in grandi quantità genera un picco maggiore del deflusso, mentre le aree verdi e una grandezza ridotta del sottobacino danno vita a un picco di deflusso minore.
