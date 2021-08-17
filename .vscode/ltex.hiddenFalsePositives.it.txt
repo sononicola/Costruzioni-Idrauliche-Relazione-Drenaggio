@@ -1,0 +1,2 @@
+{"rule":"ER_01_001","sentence":"^\\QConfronto (a durata fissata) tra la frequenza campionaria e la probabilità di non superamento con i tre metodi della distribuzione di Gumbel\\E$"}
+{"rule":"ER_01_001","sentence":"^\\QLa costruzione del ietogramma Chicago avviene attraverso le formule dell'altezza di pioggia \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q pre e post picco e l'intensità di pioggia media \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, che risulterà costante a tratti di 5 .\\E$"}

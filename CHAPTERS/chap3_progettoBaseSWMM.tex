@@ -7,7 +7,7 @@ Il $CN$ si classifica in funzione del tipo e uso del suolo.
 
 Inoltre si valutano le portate delle condotte attraverso il modello di simulazione afflussi-deflussi e il modello di propagazione idraulica all'interno della rete nel software SWMM.
 
-I due modelli sopra citati, per valutare i processi naturali, suddividono la zona in 3 comparti:
+I due modelli sopra citati, per valutare i processi naturali, suddividono la zona in tre comparti:
 \begin{itemize}
 \item \emph{atmosferico}, che rappresenta la precipitazione sul bacino urbano;
 \item \emph{sottobacini}, creati da noi per suddividere l'area in partizioni che ricevono le acque dal comparto precedente e le indirizzano nel comparto \emph{rete di trasporto} come ruscellamento superficiale;
@@ -137,8 +137,8 @@ Si riportano in tabella \ref{tab:ietocost} i valori delle intensità di pioggia 
 Ci si è fermati ad un tempo di quattro ore perché prima delle tre ore e mezza, come visto nel capitolo \ref{cap:pluviometriche}, gli scrosci hanno più importanza delle precipitazioni orarie.
 Dopo aver calcolato i valori delle intensità si prosegue sul programma SWMM.
 
-Per iniziare sul progetto di base, con lo scarico comune per ogni sottobacino, si inseriscono i valori di intensità di precipitazione per ciascun ietogramma costante che si vuole realizzare e analizzare per valutare quale sia l'evento più gravoso e quindi il tempo critico del bacino. 
-Dopodiché impostando nel pluviometro lo ietogramma costante e la rispettiva durata eseguendo il programma si ricevono i dati di picco di deflusso, di infiltrazione, di deflusso totale e di quantità di precipitazione.
+Per iniziare sul progetto di base, con lo scarico comune per ogni sottobacino, si inseriscono i valori d'intensità di precipitazione per ciascun ietogramma costante che si vuole realizzare e analizzare per valutare quale sia l'evento più gravoso e quindi il tempo critico del bacino. 
+Dopodiché impostando nel pluviometro lo ietogramma costante e la rispettiva durata eseguendo il programma si ricevono i dati di picco di deflusso, d'infiltrazione, di deflusso totale e di quantità di precipitazione.
 Quest'ultima si può verificare facilmente dato che corrisponde all'intensità di pioggia moltiplicata per il rispettivo tempo di durata.
 
 Ottenuti tutti i dati degli ietogrammi costanti si analizza il deflusso di ciascuno andando a constatare quale curva dia il picco maggiore e di conseguenza sapere quale sia il tempo critico del bacino (Figura \ref{fig:DeflussoBacinoIetogrammiCostanti}). 
@@ -180,7 +180,7 @@ Non avendo molto senso uno ietogramma Chicago pari al tempo critico di \SI{5}{\m
 \begin{equation}
     t_\text{picco} = {r\,t_\text{tot}}
 \end{equation}
-Facendo così la posizione del picco del deflusso risulterà a \SI{1}{\hour} come visibile nello ietrogramma Chicago riportato in figura \ref{fig:Chicago}.
+Facendo così la posizione del picco del deflusso risulterà a \SI{1}{\hour} come visibile nello ietogramma Chicago riportato in figura \ref{fig:Chicago}.
 
 \begin{figure}[htb]
     \centering
@@ -215,7 +215,7 @@ Facendo così la posizione del picco del deflusso risulterà a \SI{1}{\hour} com
     \label{fig:Chicago}
 \end{figure}   
 
-Discretizzando lo ietogramma Chicago ad intervalli di \SI{5}{\minute}, in riferimento alla figura \ref{fig:Chicago}, si osserva una prima fase di accumulo d'acqua, dove le depressioni superficiali iniziano a colmarsi, quindi prima del picco si ha che la zona è già stata in parte sollecitata.
+Discretizzando lo ietogramma Chicago a intervalli di \SI{5}{\minute}, in riferimento alla figura \ref{fig:Chicago}, si osserva una prima fase di accumulo d'acqua, dove le depressioni superficiali iniziano a colmarsi, quindi prima del picco si ha che la zona è già stata in parte sollecitata.
 La costruzione del ietogramma Chicago avviene attraverso le formule dell'altezza di pioggia $h(t_p)$ pre e post picco e l'intensità di pioggia media $i_m$, che risulterà costante a tratti di \SI{5}{\minute}.
 \begin{equation}
 \label{eq:altezza}
@@ -259,7 +259,7 @@ Per un tempo maggiore di zero come soluzione si ha che la funzione di trasferime
     \begin{tabular}{cS[table-format=2.2]S[table-format=3.2]S[table-format=1.4]S[table-format=1.2]S[table-format=3.2]}
         \toprule
         \multirow{3}{*}{Sottobacino} & \multicolumn{1}{c}{Quantità} & \multicolumn{1}{c}{Picco} & \multicolumn{1}{c}{Area} & \multicolumn{1}{c}{Coefficiente} & \multicolumn{1}{c}{Coefficiente} \\
-        & \multicolumn{1}{c}{Precipitazione} & \multicolumn{1}{c}{Deflusso} & \multicolumn{1}{c}{Totale} & \multicolumn{1}{c}{Deflusso} & \multicolumn{1}{c}{Udumetrico} \\
+        & \multicolumn{1}{c}{Precipitazione} & \multicolumn{1}{c}{Deflusso} & \multicolumn{1}{c}{Totale} & \multicolumn{1}{c}{Deflusso} & \multicolumn{1}{c}{Udometrico} \\
         & \multicolumn{1}{c}{[\si{\milli\metre}]} & \multicolumn{1}{c}{[\si{\litre\per\second}]} & \multicolumn{1}{c}{[\si{\hectare}]} & \multicolumn{1}{c}{[--]} & \multicolumn{1}{c}{[\si{\litre\per\second\per\hectare}]} \\
         \midrule
 01 & 45.41 & 24.43 & 0.3016 & 0.46 & 81.00 \\
