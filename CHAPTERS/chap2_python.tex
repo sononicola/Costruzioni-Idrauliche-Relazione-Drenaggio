@@ -3,7 +3,7 @@
 Dopo che si è eseguito un primo inquadramento della zona si procede con le elaborazioni dei dati dei massimi annuali degli scrosci e delle precipitazioni orarie ricavate dalla stazione pluviometrica di Laste a Trento.
 Attraverso queste elaborazioni si pone l'obiettivo di determinare le curve di possibilità pluviometrica (CPP) a diversi tempi di ritorno $T_r$.
 %(Tab.1 (a[mm/h alla n];n)).... svolte con il metodo di Gumbel momenti o minimi quadrati o massima verosimiglianza
-Per la progettazione successiva si è scelto un tempo di ritorno di pari a \SI{25}{anni}. 
+Per la progettazione successiva si è scelto un tempo di ritorno pari a \SI{25}{anni}. 
 
 Per graficare le CPP a tempo di ritorno assegnato occorre conoscere i parametri $a$ ed $n$ della loro equazione
 \begin{equation}
@@ -18,7 +18,7 @@ Per calcolare le altezze di pioggia $h_c (T_r)$ si è fatto uso di tre metodi di
 \begin{equation}
   P(X\leq x) = \exp{\left[-\exp{\left[-x \right]} \right]}
 \end{equation}
- dove $x = \alpha ( h - u)$ mentre $h$ è il vettore con i massimi annuali relativi ad una specifica durata di precipitazione, ottenuti dalla stazione pluviometrica.
+ dove $x = \alpha ( y - u)$ mentre $y$ è il vettore con i massimi annuali relativi ad una specifica durata di precipitazione, ottenuti dalla stazione pluviometrica.
 
 I tre diversi metodi sono:
 \begin{itemize}
@@ -30,7 +30,7 @@ Avendo quindi tre diversi parametri $\alpha$ ed $u$ (avendo usato tutti e tre i 
 
 %si può verificare la validità delle distribuzioni ottenute tramite il test di Pearson che consiste in un test di significatività statistica.
 Fatto ciò si hanno i valori dell'altezza di precipitazione per ogni tempo di ritorno per una durata fissata. 
-Eseguendo il calcolo per ogni durata ed eseguendo la regressione lineare, si ottiene infine $a$ ed $n$ per poter graficare la CPP.
+Eseguendo il calcolo per ogni durata ed elaborando la regressione lineare, si ottiene infine $a$ ed $n$ per poter graficare la CPP.
 
 Nelle figure \ref{fig:ConfrontoMetodi} e \ref{fig:Pearson} viene mostrato la distribuzione di Gumbel e il relativo test di Pearson per una durata $t_p$ fissata di un'ora.
 In figura \ref{fig:Regressione} è rappresentata la regressione lineare relativa ai due macro insiemi di durata (scrosci e orarie), ottenuta avendo fissato un tempo di ritorno di 25 anni. Da questo sono ottenuti i parametri $a$ ed $n$ riportati in tabella \ref{tab:parametriCPP} e da cui è stato rapresentato l'andamento delle due curve in figura \ref{fig:CPPFinale}.
@@ -55,7 +55,7 @@ Per il seguente progetto, che riguarda un breve lasso di tempo, si prenderanno i
     \centering
     \begin{tikzpicture}
         \begin{axis}[
-            height=8cm,
+            height=10cm,
             width=\textwidth,
             grid=major,
             legend pos={south east},
@@ -84,7 +84,7 @@ Per il seguente progetto, che riguarda un breve lasso di tempo, si prenderanno i
     \centering
     \begin{tikzpicture}
         \begin{axis}[
-            height=6cm,
+            height=10cm,
             width=\textwidth,
             grid=major,
             legend pos={south east},
@@ -148,7 +148,7 @@ Per il seguente progetto, che riguarda un breve lasso di tempo, si prenderanno i
             ymin = 0, ymax = 90,
             xtick distance = 1,
             ytick distance = 10,
-            height=8cm,
+            height=12cm,
             width=\textwidth,
             grid=major,
             xlabel=$t_p$ \si{[\hour]},
@@ -173,7 +173,7 @@ Per il seguente progetto, che riguarda un breve lasso di tempo, si prenderanno i
             thick,
             red,
         ]{32.123336325360924*x^0.4471735010272544};
-        \legend{scrosci, orari};
+        \legend{scrosci, orarie};
         
         \draw[black,dashed] (3.438155,0) -- (3.4381,55.80218)
         node[anchor=north west] {$\hat{t}_p \simeq \SI{3.438}{\hour}$};

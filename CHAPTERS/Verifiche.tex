@@ -28,10 +28,14 @@ Si ottiene così per ogni tratto una \emph{Max Depth} che deve essere
 in modo di avere da un lato un ricoprimento minimo delle condotte tale che non si danneggino con il carico di veicoli, persone o intemperie;  dall'altro un ricoprimento contenuto da non avere costi di scavo troppo elevati. 
 Per stare all'interno di tale intervallo si va ad agire sulla pendenza di progetto delle condotte o, eventualmente, su sistemi di rinforzo delle stesse.
 \subsection{Diametro}
+\begin{figure}[H]
+    \centering
+    \includegraphics[]{IMG/RiempimentoCondotta.pdf}
+\end{figure}
 Con le ipotesi di moto sopra dette, si deve progettare la dimensione delle condotte facendo in modo di rispettare il loro riempimento così da rimanere all'interno delle ipotesi. 
 Per questo si è imposto un riempimento ideale $\hat{\beta}$ del \SI{75}{\percent}
 \begin{equation}
-    \hat{\beta} = \frac{h}{d} = \SI{0.75}{}
+    \hat{\beta} = \frac{h}{D} = \SI{0.75}{}
 \end{equation}
 
 Dalla formula di TIZIO applicata al caso di condotte a sezione circolare e in riferimento alla nomenclatura di figura CAIA si ha tale legge che esprime la portata in funzione del riempimento:
@@ -55,7 +59,6 @@ Da tale diametro minimo se ne va a scegliere uno di sezione immediatamente super
 
 Infine si calcola per ogni tratto la differenza di dimensione tra la condotta con diametro maggiore e tutte le altre, in modo da inserirle in SWMM e ottenere l'allineamento al cielo.
 
-\subsection{Riporto in SWMM}
 \subsection{Verifiche alle condotte}
 Si deve ora verificare che le ipotesi fatte in fase progettuale siano state rispettate. 
 Riguardo al riempimento ideale $\hat \beta$ imposto si deve controllare che il riempimento della condotta $\beta_\text{cond.}$ risulti 

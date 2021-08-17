@@ -2,8 +2,8 @@
 Al progetto della rete di drenaggio vengono ora aggiunte tre vasche di laminazione in corrispondenza dei tre sbocchi della rete e chiamate rispettivamente: \emph{Nord}, \emph{Centro} e \emph{Sud}.
 Lo scopo di tali vasche è quello di fungere da ammortizzatore idraulico venendo dimensionate in modo da contenere la portata massima scaricata nel corpo idrico recettore.
 
-Il predimensionamento delle vasche si articola in un metodo iteritavo per far sì di avere il maggior riempimento di esse (prossimo al \SI{100}{\percent}) e parallelamente un \emph{Maximum Outflow} minore della massima portata da mantenere come da progetto. 
-Tale portata è calcolata tenendo conte delle prescrizioni legislative per il coefficente udometrico, che per Trento è pari a $C_{udo} = \SI{20}{\litre\per\second\per\hectare}$, fissando così la portata massima in uscita da scaricare. 
+Il predimensionamento delle vasche si articola in un metodo iterativo per far sì di avere il maggior riempimento di esse (prossimo al \SI{100}{\percent}) e parallelamente un \emph{Maximum Outflow} minore della massima portata da mantenere come da progetto. 
+Tale portata è calcolata tenendo conte delle prescrizioni legislative per il coefficiente udometrico, che per Trento è pari a $C_{udo} = \SI{20}{\litre\per\second\per\hectare}$, fissando così la portata massima in uscita da scaricare. 
 
 La portata massima da mantenere pertanto diviene:
 \begin{equation}
@@ -12,7 +12,7 @@ La portata massima da mantenere pertanto diviene:
 \end{equation}
 dove con $A_{\text{sottobacino}}$ si intende l'area di pertinenza di ciascuna vasca, ovvero la somma delle aree dei sottobacini confluenti in essa.
 
-I parameri da variare nell'iterazione (in fase non esecutiva del progetto) sono l'area della vasca e il diametro dell'orifizio della stessa (o analogamente l'area dell'orifizio -- essendo di sezione cilindrica). 
+I parametri da variare nell'iterazione (in fase non esecutiva del progetto) sono l'area della vasca e il diametro dell'orifizio della stessa (o analogamente l'area dell'orifizio -- essendo di sezione cilindrica). 
 
 
 Come prima iterazione l'area dell'orifizio è calcolata invertendo la formula della forometria della portata uscente e ponendola uguale alla $Q_{max}$:
@@ -115,12 +115,12 @@ I dati progettuali ottenuti con le considerazioni appena viste sono riportati in
         \toprule
                                 & \multicolumn{1}{c}{Nord}   & \multicolumn{1}{c}{Centro} & \multicolumn{1}{c}{Sud}    \\
         \midrule
-        Area pertinenza vasca \si{[\hectare]}          & 7.89   & 3.20   & 7.38   \\
-        $Q_{max}$ \si{[\litre\per\second]} & 157.89 & 63.92  & 147.66 \\
-        Volume da invasare\si{[\metre\cubed]}               & 232.92 & 63.48  & 366.33 \\
-        Area vasca \si{[\square\metre]}                 & 155.28 & 42.32  & 244.22 \\
-        Area orifizio \si{[\square\metre]}        & 0.04   & 0.02   & 0.04   \\
-        Diametro orifizio   \si{[\metre]}   & 0.24   & 0.15   & 0.23   \\
+        Area pertinenza vasca \si{[\hectare]} & 8.23   & 2.87  & 7.38   \\
+        $Q_{max}$ \si{[\litre\per\second]}    & 164.51 & 57.30 & 147.66 \\
+        Volume da invasare\si{[\metre\cubed]} & 229.59 & 65.47 & 366.12 \\
+        Area vasca \si{[\square\metre]}       & 153.06 & 43.65 & 244.08 \\
+        Area orifizio \si{[\square\metre]}    & 0.05   & 0.02  & 0.04   \\
+        Diametro orifizio   \si{[\metre]}     & 0.24   & 0.14  & 0.23   \\
         \bottomrule
 \end{tabular}%
 \end{table}
@@ -155,7 +155,7 @@ Per questi sono inoltre riportati i restanti  parametri  della vasca ovvero il v
 \end{table}
 
 In figura \ref{fig:volume} si confronta il deflusso allo sbocco delle tre reti di drenaggio con e senza vasca di laminazione, graficando l'andamento del volume d'acqua all'interno della vasca.
-Si può notare come nel caso di presenza della vasca, l'accumolo di acqua in essa contenuta faccia sì che diminuisca la portata defluita allo sbocco, ritardando inoltre il tempo di massimo deflusso. 
+Si può notare come nel caso di presenza della vasca, l'accumulo di acqua in essa contenuta faccia sì che diminuisca la portata defluita allo sbocco, ritardando inoltre il tempo di massimo deflusso. 
 \begin{figure}[p]
     \centering
     \begin{tikzpicture}

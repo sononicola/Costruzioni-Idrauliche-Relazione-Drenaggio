@@ -1,8 +1,8 @@
 \chapter{Analisi idrologica e idraulica dell’area allo stato di fatto (valutazione del deflusso in SWMM)}\label{cap:progettoBase}
 Prima di passare all'utilizzo di SWMM si è deciso quali metodologie usare all'interno dello studio.
 Per la depurazione delle piogge si applica il metodo del Curve Number ($CN$) basato su Green-Ampt. 
-Questo metodo utilizza le informazioni fornite dal Soil Conservation Service ($SCS-CN$), cioè il volume netto totale di un evento di pioggia e le perdite iniziali, per calibrare due parametri del modello di Green-Ampt ($GA$), ossia il tempo di "stagno (ponding)" e la conducibilità idraulica satura del suolo.
-Questo metodo è vantaggioso in quanto per essere applicato richiede solamente la stima del Curve Number ($CN$) e della conducibilità idraulica ($K_s$). 
+Questo metodo utilizza le informazioni fornite dal Soil Conservation Service ($SCS-CN$), cioè il volume netto totale di un evento di pioggia e le perdite iniziali, per calibrare due parametri del modello di Green-Ampt, ossia il tempo di "stagno (ponding)" e la conducibilità idraulica satura del suolo.
+Questo metodo è vantaggioso in quanto per essere applicato richiede solamente la stima del Curve Number ($CN$) e della conducibilità idraulica $K_s$. 
 Il $CN$ si classifica in funzione del tipo e uso del suolo. 
 
 Inoltre si valutano le portate delle condotte attraverso il modello di simulazione afflussi-deflussi e il modello di propagazione idraulica all'interno della rete nel software SWMM.
@@ -58,7 +58,7 @@ Con l'aiuto dello sfondo si riportano i sottobacini inserendo in ognuno i dati i
 \end{table}
 
 Successivamente si costruiscono degli ietogrammi che rappresentano l'andamento dell'intensità di pioggia per una determinata durata. 
-Prima si valuteranno degli ietogrammi costanti per una prima analisi grossolana e per ricavare il tempo critico.
+Prima si valuteranno degli ietogrammi costanti per un'analisi grossolana e  ricavarne il tempo critico.
 Infine, con l'analisi dei precedenti ietogrammi, si passerà alla realizzazione del ietogramma Chicago per una rappresentazione più dettagliata e precisa dell'andamento dell'intensità di precipitazione.
 % Infatti con l'inserimento di quest'ultimo ietogramma si passa dal progetto di base al progetto vero e proprio andando ad inserire su SWMM la rete di drenaggio ipotizzata su QGIS.(Fig. bo una con rete)
 % In questa fase progettuale con i modelli di simulazione afflussi-deflussi e di propagazione idraulica all'interno della rete si progettano e verificano le condotte, cioè il diametro, il riempimento, l'autopulizia e la velocità dell'acqua, sistemi di laminazione puntuali, come le vasche volano, e sistemi diffusi, come i LID. 
@@ -79,7 +79,7 @@ Considerando che il terreno dell'area di studio sia principalmente sabbioso e co
 Per la seguente relazione si è deciso di tener conto di un terreno con classe \emph{terriccio sabbioso}.
 
 Infine si è proceduto al calcolo del tempo di secca $T_{\text{secco}}$, cioè il periodo di tempo che impiega il suolo completamente saturo a tornare allo stato secco.
-Questo perché per la simulazione continua in SWMM richiede di specificare una stima del tempo di secca in giorni.
+Questo perché per la simulazione di SWMM richiede di specificare una stima del tempo di secca in giorni.
 Utilizzando il metodo di Green-Ampt questo tempo si basa esclusivamente sulla conducibilità idraulica $K_s$ e la sua stima si calcola con la formula: 
 \begin{equation}
     T_{\text{secco}} = \frac{\SI{3.125}{}}{\sqrt{K_s}}
@@ -114,7 +114,7 @@ Si riportano in tabella \ref{tab:ietocost} i valori delle intensità di pioggia 
     \label{tab:ietocost}
     \begin{tabular}{S[table-format=3.0]S[table-format=1.2]S[table-format=3.4]}
         \toprule
-        \multicolumn{1}{c}{Durata} & \multicolumn{1}{c}{Durata} & \multicolumn{1}{c}{Intensità $i$}\\
+        \multicolumn{2}{c}{Durata $t_p$}  & \multicolumn{1}{c}{Intensità $i$}\\
         \multicolumn{1}{c}{[\si{\minute}]} & \multicolumn{1}{c}{[\si{\hour}]} & \multicolumn{1}{c}{[\si{\milli\metre\per\hour}]}\\
         \midrule
 1 & 0.02 & 441.2547 \\
@@ -128,15 +128,16 @@ Si riportano in tabella \ref{tab:ietocost} i valori delle intensità di pioggia 
 60 & 1.00 & 34.8904 \\
 120 & 2.00 & 22.7063 \\
 180 & 3.00 & 17.6611 \\
+\midrule
 240 & 4.00 & 14.9275 \\
 300 & 5.00 & 13.1951 \\ \bottomrule
 \end{tabular}
 \end{table}
 
 Ci si è fermati ad un tempo di quattro ore perché prima delle tre ore e mezza, come visto nel capitolo \ref{cap:pluviometriche}, gli scrosci hanno più importanza delle precipitazioni orarie.
-Dopo aver calcolato i valori delle intensità, si prosegue sul programma SWMM.
+Dopo aver calcolato i valori delle intensità si prosegue sul programma SWMM.
 
-Per iniziare sul progetto di base con lo scarico comune per ogni sottobacino si inseriscono i valori di intensità di precipitazione per ciascun ietogramma costante che si vuole realizzare e analizzare per valutare quale sia l'evento più gravoso e quindi il tempo critico del bacino. 
+Per iniziare sul progetto di base, con lo scarico comune per ogni sottobacino, si inseriscono i valori di intensità di precipitazione per ciascun ietogramma costante che si vuole realizzare e analizzare per valutare quale sia l'evento più gravoso e quindi il tempo critico del bacino. 
 Dopodiché impostando nel pluviometro lo ietogramma costante e la rispettiva durata eseguendo il programma si ricevono i dati di picco di deflusso, di infiltrazione, di deflusso totale e di quantità di precipitazione.
 Quest'ultima si può verificare facilmente dato che corrisponde all'intensità di pioggia moltiplicata per il rispettivo tempo di durata.
 
@@ -175,7 +176,7 @@ Questo evento anche se molto breve per la nostra zona si può considerare come e
 \end{figure}
 
 Ora per migliorare la nostra analisi dell'evento meteorologico si valuta uno ietogramma Chicago che presenta andamenti temporali non costanti e che sia di durata paragonabile o comunque maggiore all'evento critico.
-Non avendo molto senso uno ietogramma Chicago pari al tempo critico di \SI{5}{\minute} dato che con un tempo così ridotto non si otterrebbero dati molto significativi, si impone una durata   $t_{\text{tot}} = \SI{2}{\hour}$, per sollecitare l'area gradualmente, e una posizione di picco $r$, che generalmente nei bacini urbani è compresa tra \SI{0.3} e \SI{0.5}, a \SI{0.5} per essere più cautelativi. 
+Non avendo molto senso uno ietogramma Chicago pari al tempo critico di \SI{5}{\minute} dato che con un tempo così ridotto non si otterrebbero dati molto significativi si impone una durata   $t_{\text{tot}} = \SI{2}{\hour}$, per sollecitare l'area gradualmente, e una posizione di picco $r$, che generalmente nei bacini urbani è compresa tra \SI{0.3} e \SI{0.5}, a \SI{0.5} per essere più cautelativi. 
 \begin{equation}
     t_\text{picco} = {r\,t_\text{tot}}
 \end{equation}
@@ -214,7 +215,7 @@ Facendo così la posizione del picco del deflusso risulterà a \SI{1}{\hour} com
     \label{fig:Chicago}
 \end{figure}   
 
-Discretizzando lo ietogramma Chicago ad intervalli di \SI{5}{\minute}, dalla figura, si osserva una prima fase di accumulo d'acqua, dove le depressioni superficiali iniziano a colmarsi, quindi prima del picco si ha che la zona è già stata in parte sollecitata.
+Discretizzando lo ietogramma Chicago ad intervalli di \SI{5}{\minute}, in riferimento alla figura \ref{fig:Chicago}, si osserva una prima fase di accumulo d'acqua, dove le depressioni superficiali iniziano a colmarsi, quindi prima del picco si ha che la zona è già stata in parte sollecitata.
 La costruzione del ietogramma Chicago avviene attraverso le formule dell'altezza di pioggia $h(t_p)$ pre e post picco e l'intensità di pioggia media $i_m$, che risulterà costante a tratti di \SI{5}{\minute}.
 \begin{equation}
 \label{eq:altezza}
@@ -307,6 +308,7 @@ Per un tempo maggiore di zero come soluzione si ha che la funzione di trasferime
         ]
         \addplot +[mark=none,style=solid,color=red] table[x index=0,y index=1,header=false] {IMG/Total-Inflow/total_inflow_5min_Chicago_25anni-barato.txt};
         \node at (axis cs:1.2,2550) [anchor=south west] {\SI{2610.67}{\litre\per\second}};
+        \fill[color=red] (1.16,2610) circle (3pt);
         \end{axis}
     \end{tikzpicture}
     \caption{Ideogramma di piena in uscita con indicazione del picco in riferimento allo scarico di figura \ref{fig:ProgettoBase}}
