@@ -1,0 +1,165 @@
+\section{Progetto con vasche e lid}
+Viene ora valutata l'aggiunta di sistemi LID per capirne l'effetto benefico che possono portare al progetto fin qui visto. 
+Questi sistemi vengono infatti detti a basso impatto ambientale (Low Impact Development, LID) e rappresentano l’insieme di strategie e tecniche che vengono utilizzate nella gestione sostenibile delle acque meteoriche. 
+Il loro scopo è quello di controllare e trattenere una buona parte delle acque meteoriche tramite processi pressoché naturali laminando le portate o mantenendo il regime idrico (concetto di invarianza idraulica) presente prima dell'urbanizzazione.
+
+Esistono varie tipologie di LID: in questo progetto si  è deciso di applicare celle di bio-ritenzione, tetti verdi e pavimentazioni permeabili.
+La prima tipologia riguardano aree con uno strato inferiore di ghiaia che funge da drenaggio o da immagazzinamento delle acque delle aree circostanti.
+Sopra a questo primo strato si ha del terreno per favorire la nascita e crescita di alberature di media e piccola grandezza.
+Per quanto riguarda i tetti verdi questi vengono considerati una variante delle celle di bio-ritenzione con uno strato di terra meno alto e con strati sintetici, fatti di guaine, per una maggiore capacità drenante.
+Infine le pavimentazioni permeabili consistono in aree composte da uno strato cementizio o di asfalto drenante, dove l'acqua può filtrare nello strato sottostante che funge da immagazzinamento e da drenaggio.
+
+\subsection{Procedimento e progetto}
+Al fine di applicare i sistemi LID si deve dapprima scegliere le aree in cui è opportuna la loro installazione, per poi andare a definire tutti quei parametri geotecnici e costruttivi atti a soddisfare le caratteristiche dei manufatti che si vogliono realizzare.
+Precedentemente a questo occorre inoltre analizzare il suolo dei sottobacini dello stato di fatto iniziale in modo da conoscere l'estensione dell'area su cui avranno luogo i LID, la loro dimensione pianificabile, e la percentuale di saturazione e di impermealizzione del suolo stesso. 
+Essendo molto numerosi i parametri da inserire in SWMM, si riporta in appendice a pagina {\RED{NUMERO}} direttamente il codice di input necessario alla loro elaborazione nel programma. 
+Si riportano in aggiunta delle schermate dei tre sistemi progettati atte a far corrispondere il codice con il parametro del LID.
+
+Le celle di bio-ritenzione si sono posizionate lungo tutte le canalette presenti nel quartiere. 
+È prevista una vegetazione densa al loro interno, con una ampia capacità di immagazzinamento senza possibilità di drenaggio nella rete principale.
+
+I tetti verdi vengono posizionati nella maggior parte degli edifici preesistenti, ove ne è possibile l'installazione. 
+
+Per quanto riguarda le aree di pavimentazione permeabile si sono poste in corrispondenza del parcheggio Monte Baldo e dell'ampia area di manovra a nord del parcheggio stesso, in modo da non impattare la funzione della zona stessa e mantenerla ad uso parcheggio.
+A livello di pavimentazione è prevista l'installazione di blocchetti in calcestruzzo con attorno la possibilità di crescita della vegetazione con una percentuale del \SI{60}{\percent}.
+
+\subsection{Considerazioni finali}
+Eseguita l'analisi si è voluto confrontare i diversi stati progettuali al fine di valutarne la loro  efficacia. 
+A tale scopo è stata svolta un'analisi anche con solo la presenza dei LID e senza le vasche di laminazione.
+
+Con tali configurazioni della rete è stato rifatto il procedimento descritto all'inizio di questo capitolo per la riprogettazione delle condotte. 
+In figura \ref{fig:ConfrontoLID} è rappresentato l'andamento del deflusso ai recapiti finali nelle quattro casistiche.
+Si è notato come l'inserimento dei LID porti, soprattutto nelle aree altamente impermeabili poste a sud e defluenti nel terzo recapito finale, ad una riduzione del deflusso totale. 
+Questo comporta inoltre la possibilità di diminuire la dimensione delle condotte e il volume delle vasche. Le condotte 1, 2, 15, 28 possono infatti avere un diametro di \SI{10}{\centi\metre} minore rispetto a quelli elencati nella tabella \ref{tab:Diametri_conduct-mod} riportata precedentemente a pagina \pageref{tab:Diametri_conduct-mod}. 
+Le prime due vasche avrebbero una riduzione di circa \SI{30}{\metre\cubed} mentre la terza di oltre \SI{120}{\metre\cubed} pari $1/3$ dell'originale.
+
+
+\begin{lstlisting}
+[LID_CONTROLS]
+;;Name               Type/Layer Parameters
+;;--------------     ---------- ----------
+ParcheggiPermeabile1 PP
+ParcheggiPermeabile1 SURFACE    0.0        0     0.1   0.5  5
+ParcheggiPermeabile1 PAVEMENT   150        0.15  0.4   360  0     0    0
+ParcheggiPermeabile1 STORAGE    300        0.3   0.5   0
+ParcheggiPermeabile1 DRAIN      0          0.5   6     6    0     0
+TettiVerdi           GR
+TettiVerdi           SURFACE    0.0        0.0   0.1   1.0  5
+TettiVerdi           SOIL       100        0.5   0.4   0.1  2000  40   70
+TettiVerdi           DRAINMAT   50         0.3   0.01
+RetentionCellsPiante BC
+RetentionCellsPiante SURFACE    100        0.1   0.1   0.5  5
+RetentionCellsPiante SOIL       300        0.5   0.2   0.1  4     35   3.5
+RetentionCellsPiante STORAGE    200        0.75  0.5   0
+RetentionCellsPiante DRAIN      0          0.5   6     6    0     0
+\end{lstlisting}
+\begin{landscape}
+\begin{lstlisting}[basicstyle=\footnotesize\ttfamily]
+[LID_USAGE]
+;;Subcatchment   LID                  Process Number     Area    Width  InitSat  FromImp  ToPerv  RptFile  DrainTo  FromPerv
+;;-------------- ----------------     ------- ---------  ------  -----  -------  -------  ------  -------- --------
+S_2              TettiVerdi           1       1148.864   24.010  0      0        0        *       *        0
+S_2              RetentionCellsPiante 1       1233.037   32      0      0        0        *       *        0
+S_3              TettiVerdi           1       160.533    6.981   0      0        0        *       *        0
+S_4              RetentionCellsPiante 1       337.869    69.486  0      0        0        *       *        0
+S_5              RetentionCellsPiante 1       147.403    36.546  0      0        0        *       *        0
+S_6              TettiVerdi           1       574.006    30.530  0      0        0        *       *        0
+S_6              RetentionCellsPiante 1       401.041    82.5    0      0        0        *       *        0
+S_7              TettiVerdi           1       409.026    32.451  0      0        0        *       *        0
+S_7              RetentionCellsPiante 1       100.528    87.646  0      0        0        *       *        0
+S_10             TettiVerdi           1       441.657    11.003  0      0        0        *       *        0
+S_10             RetentionCellsPiante 1       42.96      52.54   0      0        0        *       *        0
+S_11             TettiVerdi           1       616.205    39.484  0      0        0        *       *        0
+S_11             RetentionCellsPiante 1       97.675     52.54   0      0        0        *       *        0
+S_15             TettiVerdi           1       669.122    37.466  0      0        0        *       *        0
+S_15             RetentionCellsPiante 1       272.261    109.044 0      0        0        *       *        0
+S_18             TettiVerdi           1       709.912    47.5    0      0        0        *       *        0
+S_20             TettiVerdi           1       900.278    36      0      0        0        *       *        0
+S_21             TettiVerdi           1       74.188     12      0      0        0        *       *        0
+S_22             ParcheggiPermeabile1 1       4075.557   60      0      0        0        *       *        0
+S_22             TettiVerdi           1       3911.637   23.4    0      0        0        *       *        0
+S_24             ParcheggiPermeabile1 1       7847.3     130     0      0        0        *       *        0
+\end{lstlisting}
+\end{landscape}
+
+\begin{figure}[p]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            restrict x to domain=-0:4,
+            height=6.5cm,
+            width=15cm,
+            grid=major,
+            xlabel=Tempo trascorso dall'inizio della precipitazione \si{[\hour]},
+            ylabel=Deflusso  \si{[\litre\per\second]},
+            xtick = {0,0.5,...,4},
+            title= \emph{Recapito finale 1},
+            /pgf/number format/.cd,
+            use comma,
+            1000 sep={\,}
+        ]
+        \addplot +[mark=none,style=solid,color=red] table[x index=0,y index=1,header=false] {IMG/LID-Inflow/PreVasca_Attenuazione1.txt};
+        \addplot +[mark=none,style=solid,color=blue] table[x index=0,y index=1,header=false] {IMG/LID-Inflow/SoloLID_Inflow1.txt};
+        \addplot +[mark=none,style=solid,color=cyan] table[x index=0,y index=1,header=false] {IMG/LID-Inflow/Vasca_Inflow1.txt};
+        %\addplot +[mark=none,style=solid,color=green] table[x index=0,y index=1,header=false] {IMG/LID-Inflow/LIDvasca_Inflow1.txt};
+        \addplot +[mark=none,style=solid,color=orange] table[x index=0,y index=1,header=false] {IMG/LID-Inflow/LIDvascamod_Inflow1.txt};
+        
+        \legend{Solo condotte, + LID, + Vasche, + Vasche e LID, + Vache e LID mod   }    
+        \end{axis}
+    \end{tikzpicture}
+
+    \vspace{.5cm}
+    %
+    \begin{tikzpicture}
+        \begin{axis}[
+            restrict x to domain=-0:4,
+            height=6.5cm,
+            width=15cm,
+            grid=major,
+            xlabel=Tempo trascorso dall'inizio della precipitazione \si{[\hour]},
+            ylabel=Deflusso  \si{[\litre\per\second]},
+            xtick = {0,0.5,...,4},
+            title= \emph{Recapito finale 2},
+            /pgf/number format/.cd,
+            use comma,
+            1000 sep={\,}
+        ]
+        \addplot +[mark=none,style=solid,color=red] table[x index=0,y index=1,header=false] {IMG/LID-Inflow/PreVasca_Attenuazione2.txt};
+        \addplot +[mark=none,style=solid,color=blue] table[x index=0,y index=1,header=false] {IMG/LID-Inflow/SoloLID_Inflow2.txt};
+        \addplot +[mark=none,style=solid,color=cyan] table[x index=0,y index=1,header=false] {IMG/LID-Inflow/Vasca_Inflow2.txt};
+        %\addplot +[mark=none,style=solid,color=green] table[x index=0,y index=1,header=false] {IMG/LID-Inflow/LIDvasca_Inflow2.txt};
+        \addplot +[mark=none,style=solid,color=orange] table[x index=0,y index=1,header=false] {IMG/LID-Inflow/LIDvascamod_Inflow2.txt};
+        
+        \legend{Solo condotte, + LID, + Vasche, + Vasche e LID  } 
+        \end{axis}
+    \end{tikzpicture}
+
+    \vspace{.5cm}
+    %
+    \begin{tikzpicture}
+        \begin{axis}[
+            restrict x to domain=-0:4,
+            height=6.5cm,
+            width=15cm,
+            grid=major,
+            xlabel=Tempo trascorso dall'inizio della precipitazione \si{[\hour]},
+            ylabel=Deflusso  \si{[\litre\per\second]},
+            xtick = {0,0.5,...,4},
+            title= \emph{Recapito finale 3},
+            /pgf/number format/.cd,
+            use comma,
+            1000 sep={\,}
+        ]
+        \addplot +[mark=none,style=solid,color=red] table[x index=0,y index=1,header=false] {IMG/LID-Inflow/PreVasca_Attenuazione3.txt};
+        \addplot +[mark=none,style=solid,color=blue] table[x index=0,y index=1,header=false] {IMG/LID-Inflow/SoloLID_Inflow3.txt};
+        \addplot +[mark=none,style=solid,color=cyan] table[x index=0,y index=1,header=false] {IMG/LID-Inflow/Vasca_Inflow3.txt};
+        %\addplot +[mark=none,style=solid,color=green] table[x index=0,y index=1,header=false] {IMG/LID-Inflow/LIDvasca_Inflow3.txt};
+        \addplot +[mark=none,style=solid,color=orange] table[x index=0,y index=1,header=false] {IMG/LID-Inflow/LIDvascamod_Inflow3.txt};
+        
+        \legend{Solo condotte, + LID, + Vasche, + Vasche e LID  } 
+        \end{axis}
+    \end{tikzpicture}
+    %
+    \caption{Confronto del deflusso allo sbocco della rete pre e post l'installazione dei LID}
+    \label{fig:ConfrontoLID}
+\end{figure}
