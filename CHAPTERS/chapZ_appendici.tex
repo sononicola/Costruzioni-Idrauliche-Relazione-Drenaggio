@@ -1,8 +1,8 @@
 \appendix
 \chapter{Allegati}
+\phantomsection
 \label{appendix:SWMM}
 \section{Tabelle e immagini da SWMM}
-%
 \begin{figure}[H]
     \centering
     \includegraphics[trim=2.5cm 4.5cm 2.5cm 3.6cm,clip,width=\textwidth]{IMG/table4-7_Ks.pdf} 
@@ -20,18 +20,7 @@
 %\section{Progetto con vasche e lid sistemato}
 %
 \section{Codici di input SWMM per i LID e relative immagini}
-\begin{landscape}
-\begin{figure}[H]
-    \centering
-    % \subfloat[][\emph{Campata 1\label{fig:MomentiUnitariA}}]
-    \subfloat[][\emph{Parametri del sottobacino}]{\includegraphics[height=0.45\textheight]{IMG/LID-Inflow/LID0.png}} 
-    \subfloat[][\emph{Tetto verde}]{\includegraphics[height=0.45\textheight]{IMG/LID-Inflow/LID1.png}} \\
-    \subfloat[][\emph{Pavimento permeabile}]{\includegraphics[height=0.45\textheight]{IMG/LID-Inflow/LID2.png}}
-    \subfloat[][\emph{Celle di bio-ritenzione}]{\includegraphics[height=0.45\textheight]{IMG/LID-Inflow/LID3.png}}\\
-\caption{Schermate SWMM riguardo i parametri dei LID}
-%\label{fig:ProfiliProgettoCondotte}
-\end{figure}
-\end{landscape}
+\label{appendix:codiceLID}
 \begin{lstlisting}
     [LID_CONTROLS]
     ;;Name               Type/Layer Parameters
@@ -50,9 +39,10 @@
     RetentionCellsPiante SOIL       300        0.5   0.2   0.1  4     35   3.5
     RetentionCellsPiante STORAGE    200        0.75  0.5   0
     RetentionCellsPiante DRAIN      0          0.5   6     6    0     0
-    \end{lstlisting}
-    \begin{landscape}
-    \begin{lstlisting}[basicstyle=\scriptsize\ttfamily,numberstyle=\tiny]
+\end{lstlisting}
+%
+\begin{landscape}
+\begin{lstlisting}[basicstyle=\scriptsize\ttfamily,numberstyle=\tiny]
     [LID_USAGE]
     ;;Subcatchment   LID                  Process Number     Area    Width  InitSat  FromImp  ToPerv  RptFile  DrainTo  FromPerv
     ;;-------------- ----------------     ------- ---------  ------  -----  -------  -------  ------  -------- --------
@@ -77,11 +67,23 @@
     S_22             ParcheggiPermeabile1 1       4075.557   60      0      0        0        *       *        0
     S_22             TettiVerdi           1       3911.637   23.4    0      0        0        *       *        0
     S_24             ParcheggiPermeabile1 1       7847.3     130     0      0        0        *       *        0
-    \end{lstlisting}
-    \end{landscape}
-    
-%\section{prova}
-%\chapter{Computo metrico}
-\includepdf[pages={1},pagecommand={\thispagestyle{plain},\section{Computo metrico estimativo}},addtotoc={1,section,1,Computo Metrico Estimativo,appendix:computo},offset=0 -5cm]{img/computo1.pdf}
+\end{lstlisting}
+\end{landscape}
+%
+\begin{landscape}
+    \begin{figure}[p]
+        \centering
+        % \subfloat[][\emph{Campata 1\label{fig:MomentiUnitariA}}]
+        \subfloat[][\emph{Parametri del sottobacino}]{\includegraphics[height=0.42\textheight]{IMG/LID-Inflow/LID0.png}} 
+        \subfloat[][\emph{Tetto verde}]{\includegraphics[height=0.42\textheight]{IMG/LID-Inflow/LID1.png}} \\
+        \subfloat[][\emph{Pavimento permeabile}]{\includegraphics[height=0.42\textheight]{IMG/LID-Inflow/LID2.png}}
+        \subfloat[][\emph{Celle di bio-ritenzione}]{\includegraphics[height=0.42\textheight]{IMG/LID-Inflow/LID3.png}}\\
+    \caption{Schermate SWMM riguardo i parametri dei LID}
+    %\label{fig:ProfiliProgettoCondotte}
+    \end{figure}
+\end{landscape}
+%
+%section dentro a pagecommand manda in toc e crea il titolo
+\includepdf[pages={1},pagecommand={\thispagestyle{plain},\section{Computo metrico estimativo}},offset=0 -5cm]{img/computo1.pdf}
 \includepdf[pages={1,2},pagecommand={\thispagestyle{plain}}]{img/computo2.pdf}
 

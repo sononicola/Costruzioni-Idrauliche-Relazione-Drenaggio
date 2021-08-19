@@ -1,5 +1,6 @@
 \clearpage
 \section{Progetto con vasche}
+\phantomsection
 Al progetto della rete di drenaggio vengono ora aggiunte tre vasche di laminazione in corrispondenza dei tre sbocchi della rete e chiamate rispettivamente: \emph{Nord}, \emph{Centro} e \emph{Sud}.
 Lo scopo di tali vasche è quello di fungere da ammortizzatore idraulico venendo dimensionate in modo da contenere la portata massima scaricata nel corpo idrico recettore.
 
@@ -8,8 +9,8 @@ Tale portata è calcolata tenendo conte delle prescrizioni legislative per il co
 
 La portata massima da mantenere pertanto diviene:
 \begin{equation}
-    Q_{max} = C_{udo} \cdot A_{\text{sottobacino}}
-    \label{eq:qmax} \quad ,
+    \label{eq:qmax}
+    Q_{max} = C_{udo} \cdot A_{\text{sottobacino}} \quad ,
 \end{equation}
 dove con $A_{\text{sottobacino}}$ si intende l'area di pertinenza di ciascuna vasca, ovvero la somma delle aree dei sottobacini confluenti in essa.
 
@@ -130,7 +131,7 @@ In tabella \ref{tab:iterazioni} sono riportate le varie iterazioni per ciascuna 
 Per questi sono inoltre riportati i restanti  parametri  della vasca ovvero il volume medio e il volume massimo di riempimento.
 \begin{table}[htb] 
     \centering
-    \caption{Iterazioni dell'Altezza dell'orifizio e dell'Area della vasca per avere il massimo riempimento della vasca e mantenere la portata inferiore a quella massima. In grassetto sono indicate le scelte}
+    \caption[Iterazioni dell'Altezza dell'orifizio e dell'Area della vasca]{Iterazioni dell'Altezza dell'orifizio e dell'Area della vasca per avere il massimo riempimento della vasca e mantenere la portata inferiore a quella massima. In grassetto sono indicate le scelte}
     \label{tab:iterazioni}
     \begin{tabular}{cS[table-format=1.2]S[table-format=3.0]S[table-format=3.0]S[table-format=3.2]}
         \toprule
