@@ -1,8 +1,8 @@
 \chapter{Analisi idrologica e idraulica dell’area allo stato di fatto (valutazione del deflusso in SWMM)}\label{cap:progettoBase}
 Prima di passare all'utilizzo di SWMM si è deciso quali metodologie usare all'interno dello studio.
 Per la depurazione delle piogge si applica il metodo del Curve Number ($CN$) basato su Green-Ampt. 
-Questo metodo utilizza le informazioni fornite dal Soil Conservation Service ($SCS-CN$), cioè il volume netto totale di un evento di pioggia e le perdite iniziali, per calibrare due parametri del modello di Green-Ampt, ossia il tempo di "stagno (ponding)" e la conducibilità idraulica satura del suolo.
-Questo metodo è vantaggioso in quanto per essere applicato richiede solamente la stima del Curve Number ($CN$) e della conducibilità idraulica $K_s$. 
+Questo metodo utilizza le informazioni fornite dal Soil Conservation Service ($SCS-CN$), cioè il volume netto totale di un evento di pioggia e le perdite iniziali, per calibrare due parametri del modello di Green-Ampt, ossia il tempo di stagno (ponding) e la conducibilità idraulica satura del suolo.
+Questo metodo è vantaggioso in quanto per essere applicato richiede solamente la stima del Curve Number e della conducibilità idraulica $K_s$. 
 Il $CN$ si classifica in funzione del tipo e uso del suolo. 
 
 Inoltre si valutano le portate delle condotte attraverso il modello di simulazione afflussi-deflussi e il modello di propagazione idraulica all'interno della rete nel software SWMM.
@@ -10,11 +10,11 @@ Inoltre si valutano le portate delle condotte attraverso il modello di simulazio
 I due modelli sopra citati, per valutare i processi naturali, suddividono la zona in tre comparti:
 \begin{itemize}
 \item \emph{atmosferico}, che rappresenta la precipitazione sul bacino urbano;
-\item \emph{sottobacini}, creati da noi per suddividere l'area in partizioni che ricevono le acque dal comparto precedente e le indirizzano nel comparto \emph{rete di trasporto} come ruscellamento superficiale;
+\item \emph{sottobacini}, creati per suddividere l'area in partizioni che ricevono le acque dal comparto precedente e le indirizzano nel comparto \emph{rete di trasporto} come ruscellamento superficiale;
 \item \emph{rete di trasporto}, che rappresenta l'insieme della rete: canali, tubi, vasche e LID.
 \end{itemize}
 A questo punto, dopo aver individualizzato le metodologie da utilizzare, si passa allo svolgimento dell'analisi idrologica e idraulica dell'area allo stato di fatto con il fine di valutare il deflusso della zona di studio.
-Per elaborare queste analisi si impiega il software SWMM impostando un primo "progetto di base" per valutare i dati preliminari attraverso un modello cinematico.
+Per elaborare queste analisi si impiega il software SWMM impostando un primo \emph{progetto di base} per valutare i dati preliminari attraverso un modello cinematico.
 
 Inizialmente si utilizza la figura \ref{fig:sottobacini} come sfondo su SWMM per il progetto di base andando ad inserire le coordinare che si sono ricavate precedentemente da QGIS.
 Con l'aiuto dello sfondo si riportano i sottobacini inserendo in ognuno i dati in precedenza dedotti, come l'area totale, la percentuale di area impermeabile, la pendenza media e la larghezza di drenaggio calcolata come rapporto tra area [\si{\square\metre}] e lunghezza di drenaggio media [\si{\metre}] (Vedi Tabella \ref{tab:dati}).
@@ -59,7 +59,7 @@ Con l'aiuto dello sfondo si riportano i sottobacini inserendo in ognuno i dati i
 
 Successivamente si costruiscono degli ietogrammi che rappresentano l'andamento dell'intensità di pioggia per una determinata durata. 
 Prima si valuteranno degli ietogrammi costanti per un'analisi grossolana e  ricavarne il tempo critico.
-Infine, con l'analisi dei precedenti ietogrammi, si passerà alla realizzazione del ietogramma Chicago per una rappresentazione più dettagliata e precisa dell'andamento dell'intensità di precipitazione.
+Infine, con l'analisi dei precedenti ietogrammi, si passerà alla realizzazione dello ietogramma Chicago per una rappresentazione più dettagliata e precisa dell'andamento dell'intensità di precipitazione.
 % Infatti con l'inserimento di quest'ultimo ietogramma si passa dal progetto di base al progetto vero e proprio andando ad inserire su SWMM la rete di drenaggio ipotizzata su QGIS.(Fig. bo una con rete)
 % In questa fase progettuale con i modelli di simulazione afflussi-deflussi e di propagazione idraulica all'interno della rete si progettano e verificano le condotte, cioè il diametro, il riempimento, l'autopulizia e la velocità dell'acqua, sistemi di laminazione puntuali, come le vasche volano, e sistemi diffusi, come i LID. 
 
@@ -73,13 +73,13 @@ Per fare ciò si considera una massima capacità di ritenzione idrica del suolo 
 \label{eq:CN}
     CN = \frac{\SI{25400}{}}{\SI{254}{} + S}
 \end{equation}
-Si è deciso di applicare di applicare il valore massimo di $CN$ pari a \SI{74.92}.
+Si è deciso di applicare di applicare il valore massimo di $CN$ pari a \SI{74.92} .
 
 Considerando che il terreno dell'area di studio sia principalmente sabbioso e con tratti ghiaiosi e limosi, attraverso la tabella 4-7 di SWMM riportata nell'appendice \ref{appendix:SWMM} a pagina \pageref{SWMM:tabella4-7} si sono scelti due parametri di conduttività idraulica $K_s$: \SI{0.43} per una classe di terreno \emph{terriccio sabbioso} e \SI{1.18} per una classe \emph{sabbia limosa}. 
 Per la seguente relazione si è deciso di tener conto di un terreno con classe \emph{terriccio sabbioso}.
 
 Infine si è proceduto al calcolo del tempo di secca $T_{\text{secco}}$, cioè il periodo di tempo che impiega il suolo completamente saturo a tornare allo stato secco.
-Questo perché per la simulazione di SWMM richiede di specificare una stima del tempo di secca in giorni.
+Questo perché per la simulazione SWMM richiede di specificare una stima del tempo di secca in giorni.
 Utilizzando il metodo di Green-Ampt questo tempo si basa esclusivamente sulla conducibilità idraulica $K_s$ e la sua stima si calcola con la formula: 
 \begin{equation}
     T_{\text{secco}} = \frac{\SI{3.125}{}}{\sqrt{K_s}}
@@ -101,7 +101,7 @@ Questo, come vedremo nel paragrafo successivo, ci sarà utile per la valutazione
 
 \section{Ietogramma di progetto}
 Gli ietogrammi di progetto rappresentano l'andamento dell'intensità di pioggia per tutta la sua durata. Per una prima analisi grossolana si sono utilizzati ietogrammi costanti. Per elaborare i seguenti grafici si assegna un determinato tempo di ritorno, nel caso in esame pari a 25 anni, e una durata della pioggia $t_p$. 
-Questi ietogrammi si eseguono per la valutazione del tempo critico del bacino urbano. Dai parametri $a$ e $n$ delle curve di possibilità pluviometriche, ricavati nel capitolo 2, si deduce l'intensità di precipitazione $i$ che viene tenuta costante per tutta la durata di pioggia dell'evento. L'intensità si ricava dalla seguente espressione:
+Questi ietogrammi si eseguono per la valutazione del tempo critico del bacino urbano. Dai parametri $a$ e $n$ delle curve di possibilità pluviometrica, ricavati nel capitolo precedente, si deduce l'intensità di precipitazione $i$ che viene tenuta costante per tutta la durata di pioggia dell'evento. L'intensità si ricava dalla seguente espressione:
 \begin{equation}
     i = a \, t_p ^{n - 1}
 \end{equation}
@@ -175,7 +175,7 @@ Questo evento anche se molto breve per la nostra zona si può considerare come e
     \label{fig:DeflussoBacinoIetogrammiCostanti}
 \end{figure}
 
-Ora per migliorare la nostra analisi dell'evento meteorologico si valuta uno ietogramma Chicago che presenta andamenti temporali non costanti e che sia di durata paragonabile o comunque maggiore all'evento critico.
+Ora per migliorare l'analisi dell'evento meteorologico si valuta uno ietogramma Chicago che presenta andamenti temporali non costanti e che sia di durata paragonabile o comunque maggiore all'evento critico.
 Non avendo molto senso uno ietogramma Chicago pari al tempo critico di \SI{5}{\minute} dato che con un tempo così ridotto non si otterrebbero dati molto significativi si impone una durata   $t_{\text{tot}} = \SI{2}{\hour}$, per sollecitare l'area gradualmente, e una posizione di picco $r$, che generalmente nei bacini urbani è compresa tra \SI{0.3} e \SI{0.5}, a \SI{0.5} per essere più cautelativi. 
 \begin{equation}
     t_\text{picco} = {r\,t_\text{tot}}
@@ -216,7 +216,7 @@ Facendo così la posizione del picco del deflusso risulterà a \SI{1}{\hour} com
 \end{figure}   
 
 Discretizzando lo ietogramma Chicago a intervalli di \SI{5}{\minute}, in riferimento alla figura \ref{fig:Chicago}, si osserva una prima fase di accumulo d'acqua, dove le depressioni superficiali iniziano a colmarsi, quindi prima del picco si ha che la zona è già stata in parte sollecitata.
-La costruzione del ietogramma Chicago avviene attraverso le formule dell'altezza di pioggia $h(t_p)$ pre e post picco e l'intensità di pioggia media $i_m$, che risulterà costante a tratti di \SI{5}{\minute}.
+La costruzione dello ietogramma Chicago avviene attraverso le formule dell'altezza di pioggia $h(t_p)$ pre e post picco e l'intensità di pioggia media $i_m$, che risulterà costante a tratti di \SI{5}{\minute}.
 \begin{equation}
 \label{eq:altezza}
     h(t_p) = 

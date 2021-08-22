@@ -84,6 +84,8 @@
 \end{landscape}
 %
 %section dentro a pagecommand manda in toc e crea il titolo
-\includepdf[pages={1},pagecommand={\thispagestyle{plain},\section{Computo metrico estimativo}},offset=0 -5cm]{img/computo1.pdf}
-\includepdf[pages={1,2},pagecommand={\thispagestyle{plain}}]{img/computo2.pdf}
 
+\includepdf[pages={1},pagecommand={\thispagestyle{plain}\section{Computo metrico estimativo}\label{appendix:computo}},offset=0 -4cm]{img/computo1.pdf}
+\includepdf[pages={1,2},pagecommand={\thispagestyle{plain}}]{img/computo2.pdf}
+%\newgeometry{a3paper}
+\includepdf[pages={1},pagecommand={\thispagestyle{plain}\section{Rappresentazione degli elementi della rete}\label{appendix:Tavola1}},fitpaper=true,scale=0.9,offset=0 -1cm]{img/tavole/tavola.pdf}

@@ -79,7 +79,11 @@ numberstyle=\footnotesize,}
         \listoftables
         \phantomsection
         \addcontentsline{toc}{chapter}{Elenco delle tabelle}
+\endgroup
         %
+        \clearpage
+\begingroup
+        \let\clearpage\relax
         \listoffigures
         \phantomsection
         \addcontentsline{toc}{chapter}{Elenco delle figure}
@@ -189,5 +193,6 @@ numberstyle=\footnotesize,}
 \input{CHAPTERS/vasche.tex}
 \input{CHAPTERS/LID.tex}%
 %
+\input{CHAPTERS/chap5_computo.tex}
 \input{CHAPTERS/chapZ_appendici.tex}
 \end{document} 

@@ -35,10 +35,10 @@ Per stare all'interno di tale intervallo si va ad agire sulla pendenza di proget
 Con le ipotesi di moto sopra dette, si deve progettare la dimensione delle condotte facendo in modo di rispettare il loro riempimento così da rimanere all'interno delle ipotesi. 
 Per questo si è imposto un riempimento ideale $\hat{\beta}$ del \SI{75}{\percent}
 \begin{equation}
-    \hat{\beta} = \frac{h}{D} = \SI{0.75}{}
+    \hat{\beta} = \frac{h}{D} = \SI{0.75}{} \quad .
 \end{equation}
 
-Dalla formula di TIZIO applicata al caso di condotte a sezione circolare e in riferimento alla nomenclatura di figura CAIA si ha tale legge che esprime la portata in funzione del riempimento:
+Dalla formula di Chézy, con la formulazione di Gauckler-Strickler, applicata al caso di condotte a sezione circolare e in riferimento alla nomenclatura di figura sopra, si ha tale legge che esprime la portata in funzione del riempimento:
 \begin{equation}
     Q(\beta) 
     = A(\beta) \, k_s \, R^{\tfrac{2}{3}} \, i^{\tfrac{1}{2}} 
@@ -63,12 +63,12 @@ Infine si calcola per ogni tratto la differenza di dimensione tra la condotta co
 Si deve ora verificare che le ipotesi fatte in fase progettuale siano state rispettate. 
 Riguardo al riempimento ideale $\hat \beta$ imposto si deve controllare che il riempimento della condotta $\beta_\text{cond.}$ risulti 
 \begin{equation}
-    \SI{50}{\percent} \lessapprox \beta_\text{cond.} \lessapprox\SI{75}{\percent}
+    \SI{50}{\percent} \lessapprox \beta_\text{cond.} \lessapprox\SI{75}{\percent} \quad .
 \end{equation}
 
 Seguendo le indicazioni del Consiglio Superiore dei Lavori Pubblici la velocità dell'acqua all'interno delle condotte deve essere:
 \begin{equation}
-    \SI{0.5}{\metre\per\second} < V <  \SI{5}{\metre\per\second}
+    \SI{0.5}{\metre\per\second} < V <  \SI{5}{\metre\per\second} \quad .
 \end{equation}
 Questo per non avere velocità troppo basse tali da formare dei sedimenti né velocità troppo elevate tali da danneggiare il materiale stesso delle condotte.
 In realtà, per verificare che non si creino sedimenti nei periodi di non-precipitazione e rispettare il cosiddetto criterio di autopulizia, si è utilizzato anche un altro metodo che fa riferimento ad una tensione tangenziale al fondo $\tau$ minima oppure ad una pendenza del fondo (o idraulica) $i_f$ massima. 
@@ -77,7 +77,7 @@ Ovvero si deve avere:
     \label{eq:tau}
     \tau = \gamma \, R_H \, i_g > \SI{2}{\pascal}
 \end{equation}
-dove $\gamma$ è il peso specifico dell'acqua pari a \SI{1000}{\newton\per\metre\cubed}, $R_H$ è il raggio idraulico calcolato con la formula di BOH NUM e $i_g$ è la pendenza geometrica delle condotte.  
+dove $\gamma$ è il peso specifico dell'acqua pari a \SI{1000}{\newton\per\metre\cubed}, $R_H$ è il raggio idraulico calcolato come rapporto tra area e perimetro bagnati, mentre $i_g$ è la pendenza geometrica delle condotte.  
 \begin{align}
     R_H &= \frac{D}{4} \, \frac{1 - \sin(\vartheta)}{\vartheta} \\
     \vartheta &= 2 \, \arccos(1 - \beta_\text{cond.})
@@ -98,8 +98,9 @@ mentre $i_g$ rimane la pendenza geometrica delle condotte, la quale deve essere 
 
 
 \section{Progetto}
+\label{cap:ProgettoCondotte}
 Il progetto della rete di drenaggio prevede tre rami principali ciascuno composto da altrettanti recapiti finali affluenti al canale Adigetto. 
-I rami principali delle condotte, visibili nel dettaglio in figura \ref{fig:Condotte} nella fase progettuale finale, sono posti a nord, centro e sud dell'area di studio in concomitanza dei tre recapiti $R1$, $R2$, $R3$ posti a quota prefissata di \SI{184.00}{}, \SI{183.70}{}, \SI{183.50}{\metre}.
+I rami principali delle condotte, visibili nel dettaglio in figura \ref{fig:Condotte} nella fase progettuale finale, sono posti a nord, centro e sud dell'area di studio in concomitanza dei tre recapiti $R1$, $R2$, $R3$ posti a quota prefissata di \SI{184.00}{}, \SI{183.70}{} e \SI{183.50}{\metre}.
 \begin{figure}[p]
     \centering
     \includegraphics[trim=0cm 0cm 0cm 0cm,clip,frame,width=0.9\textwidth]{IMG/Nomenclatura_condotte.pdf} 
@@ -112,13 +113,13 @@ Cerca inoltre di attraversare ogni sottobacino per confluire ad ognuno il deflus
 In questo modo si riesce a dimensionare con maggiore efficacia le tubazioni. 
 In aggiunta le condotte devono essere interrotte da un tombino d'ispezione e non divenire più lunghe di \SI{100}{\metre}.
 
-Per tutte le componenti della rete è stato usato calcestruzzo armato senza nessun particolare rivestimento per cui avendo condotte circolari con pareti non perfettamente lisce si è scelto un coefficiente di Gauckler-Strickler $k_s$ pari a \SI{80}{\metre\tothe{1/3}\per\second} -- equivalente ad un numero di Manning $n$ di \SI{0.0125}{\metre\tothe{1/3}\second}, avendo usato il software SWMM di concezione anglosassone.
+Per tutte le componenti della rete è stato usato calcestruzzo armato senza nessun particolare rivestimento per cui, avendo condotte circolari con pareti non perfettamente lisce, si è scelto un coefficiente di Gauckler-Strickler $k_s$ pari a \SI{80}{\metre\tothe{1/3}\per\second} -- equivalente ad un numero di Manning $n$ di \SI{0.0125}{\metre\tothe{1/3}\second}, avendo usato il software SWMM di concezione anglosassone.
 
 Il procedimento descritto nel paragrafo precedente è alla base dei dati tabulari di seguito esposti.  
 Nella tabella \ref{tab:Nodi_nodes-mod} è riportata la profondità di scavo in base alla pendenza scelta delle condotte. 
 Nella tabella successiva si ha il calcolo del diametro di progetto e la relativa scelta del diametro commerciale, facendo attenzione alle verifiche di riempimento e di velocità visibili invece nell'ultima tabella a seguire.
 
-Nel tombino $J13$ non riuscendo a rispettare la profondità di scavo minima di \SI{1.5}{\metre} ma essendo invece di \SI{0.85}{\metre} si prevede una soletta armata sopra il tombino e lungo parte delle due condotte ad esso collegate per evitare la rottura del calcestruzzo a taglio dovuto a carichi sovrastanti. 
+Nel tombino $J13$ non riuscendo a rispettare la profondità di scavo minima di \SI{1.5}{\metre}, ma essendo invece di \SI{0.85}{\metre}, si prevede una soletta armata sopra il tombino e lungo parte delle due condotte ad esso collegate per evitare la rottura a taglio del calcestruzzo dovuto a carichi sovrastanti. 
 
 Nel caso delle condotte 18 e 21 si è scelto un diametro commerciale maggiore del dovuto per non avere scalini con le condotte a monte nei quali si accumulerebbero detriti. 
 
